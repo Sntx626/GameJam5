@@ -8,6 +8,9 @@ var bpm = 104;
 var frequenz = 60000/bpm;
 var showTime = frequenz;
 
+var upP = false;
+var leftP = false;
+var rightP = false;
 
 var arrow_up_list = [];
 var arrow_right_list = [];
@@ -49,13 +52,21 @@ func clearRowFromStopped(row):
 
 func _process(delta):
 	timeCollapsed += delta * 1000;
-	if (Input.is_action_just_released("A_up")):
+	if (Input.is_action_just_pressed("A_up") && not upP):
+		upP = true;
 		pressedRowEvent(arrow_up_list);
-	if (Input.is_action_just_released("A_left")):
+	if (Input.is_action_just_pressed("A_left") && not leftP):
+		leftP = true;
 		pressedRowEvent(arrow_left_list);
-	if (Input.is_action_just_released("A_right")):
+	if (Input.is_action_just_pressed("A_right") && not rightP):
+		rightP = true;
 		pressedRowEvent(arrow_right_list);
-			
+	if (Input.is_action_just_released("A_up") && upP):
+		upP = false;
+	if (Input.is_action_just_released("A_left") && leftP):
+		leftP = false;
+	if (Input.is_action_just_released("A_right") && rightP):
+		rightP = false;
 	while (timeCollapsed > frequenz):
 		print($UI/ArrowTop.position)
 		tick += 1;

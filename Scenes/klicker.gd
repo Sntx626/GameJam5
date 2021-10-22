@@ -1,20 +1,52 @@
 extends Node2D
 
-var currency_t0 = 0
-var currency_t1 = 0
-var currency_t2 = 0
-var currency_t3 = 0
+var currencies = []
+var buyer = []
 
 func _ready():
 	$Label.text = get_text()
 
-func _on_Button_pressed():
-	currency_t0 += 1
-	$Label.text = get_text()
+var sleep = 0
+func _process(delta):
+	sleep += delta
+	if sleep > 1:
+		for i in range(len(buyer)):
+			add_to_currency(i, buyer[i])
+		sleep = 0
+		$Label.text = get_text()
 
 func get_text():
-	var txt = "currency_t0: " + str(currency_t0) + "\n"
-	txt += "currency_t1: " + str(currency_t1) + "\n"
-	txt += "currency_t1: " + str(currency_t2) + "\n"
-	txt += "currency_t1: " + str(currency_t3)
+	var txt = ""
+	for i in range(len(currencies)):
+		txt += "T" + str(i) + ": " + str(currencies[i]) + "\n"
 	return txt
+
+func add_to_currency(tier:int, amount:int):
+	if tier < len(currencies):
+		currencies[tier] += amount
+	else:
+		currencies.append(0)
+		add_to_currency(tier, amount)
+
+func add_to_buyer(tier:int, amount:int):
+	if tier < len(buyer):
+		buyer[tier] += amount
+	else:
+		buyer.append(0)
+		add_to_buyer(tier, amount)
+
+func _on_T0_pressed():
+	add_to_currency(0, 1)
+	$Label.text = get_text()
+
+func _on_T1_pressed():
+	add_to_buyer(0,1)
+	$Label.text = get_text()
+
+func _on_T2_pressed():
+	add_to_currency(1, 1)
+	$Label.text = get_text()
+
+func _on_T3_pressed():
+	add_to_buyer(1,1)
+	$Label.text = get_text()

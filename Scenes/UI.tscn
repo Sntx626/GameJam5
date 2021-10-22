@@ -10,18 +10,18 @@ script = ExtResource( 2 )
 layer = -5
 
 [node name="ArrowLeft" type="Sprite" parent="UI"]
-position = Vector2( 206, 265 )
+position = Vector2( 206, 268 )
 rotation = -1.5708
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
 
 [node name="ArrowRight" type="Sprite" parent="UI"]
-position = Vector2( 306, 265 )
+position = Vector2( 306, 268 )
 rotation = 1.5708
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
 
 [node name="ArrowTop" type="Sprite" parent="UI"]
-position = Vector2( 256, 265 )
+position = Vector2( 256, 268 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )

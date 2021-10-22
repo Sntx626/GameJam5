@@ -15,16 +15,11 @@ var arrow_left_list = [];
 
 var template = load("res://Scenes/TemplateGhostArrow.tscn");
 func _ready():
-	updatePoints(0)
 	pass
 var points = 0;
 
 var timeCollapsed = 0;
 var tick = 0;
-
-func updatePoints(newPoints):
-	points = newPoints;
-	$UI/Points.text = str(newPoints);
 
 func addArrow(parent, list):
 		var instance = template.instance();
@@ -40,7 +35,8 @@ func addArrow(parent, list):
 	
 func pressedRowEvent(row):
 	if (row.size() > 0):
-		updatePoints(points+row[0].getStagePoints());
+		get_parent().klicker.add_to_currency(0,row[0].getStagePoints())
+		#get_parent().get_child(2).add_to_currency(0,row[0].getStagePoints())
 		remove_child(row[0]);
 		row.remove(0);
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/klicker.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Fonts/Roboto-Light.ttf"
@@ -44,5 +45,8 @@ __meta__ = {
 }
 
 [node name="Node2D" parent="." instance=ExtResource( 2 )]
+
+[node name="Klicker" parent="." instance=ExtResource( 3 )]
+position = Vector2( 5.04535, 7.56805 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

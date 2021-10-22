@@ -28,11 +28,11 @@ func addArrow(parent, list):
 		instance.scale = parent.scale;
 		instance.rotation_degrees = parent.rotation_degrees;
 		instance.set("time", showTime)
-		instance.set("start_pos", Vector2(endPos.x, endPos.y - 400))
+		instance.set("start_pos", Vector2(endPos.x, endPos.y - 248))
 		instance.set("end_pos", Vector2(endPos.x, endPos.y))
 		list.append(instance);
 		add_child(instance);
-	
+
 func pressedRowEvent(row):
 	if (row.size() > 0):
 		var points = row[0].getStagePoints();
@@ -55,9 +55,8 @@ func _process(delta):
 		pressedRowEvent(arrow_left_list);
 	if (Input.is_action_just_released("A_right")):
 		pressedRowEvent(arrow_right_list);
-			
+	
 	while (timeCollapsed > frequenz):
-		print($UI/ArrowTop.position)
 		tick += 1;
 		timeCollapsed -= frequenz;
 		if (templateUp[tick%templateUp.length()] == '.'):

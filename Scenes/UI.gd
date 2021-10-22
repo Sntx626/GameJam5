@@ -35,10 +35,12 @@ func addArrow(parent, list):
 	
 func pressedRowEvent(row):
 	if (row.size() > 0):
-		get_parent().klicker.add_to_currency(0,row[0].getStagePoints())
-		#get_parent().get_child(2).add_to_currency(0,row[0].getStagePoints())
-		remove_child(row[0]);
-		row.remove(0);
+		var points = row[0].getStagePoints();
+		if (not points == -1):
+			get_parent().klicker.add_to_currency(0,row[0].getStagePoints())
+			#get_parent().get_child(2).add_to_currency(0,row[0].getStagePoints())
+			remove_child(row[0]);
+			row.remove(0);
 
 func clearRowFromStopped(row):
 	while (row.size() > 0 && row[0].get("stopped") == true):

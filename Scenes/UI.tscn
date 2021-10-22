@@ -22,7 +22,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 
 [node name="ArrowTop" type="Sprite" parent="UI"]
-position = Vector2( 532.082, 437.268 )
+position = Vector2( 532.082, 514.63 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 

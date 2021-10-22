@@ -3,8 +3,11 @@ var templateUp =    ".        "
 var templateRight = "   .     "
 var templateLeft =  "      .  "
 
-var bpm = 150;
+var bpm = 180;
+var showTime = 1000;
+
 var frequenz = 60000/bpm;
+
 
 var arrow_up_list = [];
 var arrow_right_list = [];
@@ -23,73 +26,48 @@ func updatePoints(newPoints):
 	points = newPoints;
 	$UI/Points.text = str(newPoints);
 
+func addArrow(parent, list):
+		var instance = template.instance();
+		var endPos = parent.position;
+		instance.position = parent.position;
+		instance.scale = parent.scale;
+		instance.rotation_degrees = parent.rotation_degrees;
+		instance.set("time", showTime)
+		instance.set("start_pos", Vector2(endPos.x, endPos.y - 400))
+		instance.set("end_pos", Vector2(endPos.x, endPos.y))
+		list.append(instance);
+		add_child(instance);
+	
+func pressedRowEvent(row):
+	if (row.size() > 0):
+		updatePoints(points+row[0].getStagePoints());
+		remove_child(row[0]);
+		row.remove(0);
+
+func clearRowFromStopped(row):
+	while (row.size() > 0 && row[0].get("stopped") == true):
+		remove_child(row[0])
+		row.remove(0)
+
 func _process(delta):
 	timeCollapsed += delta * 1000;
 	if (Input.is_action_just_released("A_up")):
-		if (arrow_up_list.size() > 0):
-			var timing = arrow_up_list[0].get('timeTraveld')/arrow_up_list[0].get('time');
-			if (timing > 0.8 && timing < 0.95):
-				updatePoints(points+1);
-			remove_child(arrow_up_list[0]);
-			arrow_up_list.remove(0);
+		pressedRowEvent(arrow_up_list);
 	if (Input.is_action_just_released("A_left")):
-		if (arrow_left_list.size() > 0):
-			var timing = arrow_left_list[0].get('timeTraveld')/arrow_left_list[0].get('time');
-			if (timing > 0.8 && timing < 0.95):
-				updatePoints(points+1);
-			remove_child(arrow_left_list[0]);
-			arrow_left_list.remove(0);
+		pressedRowEvent(arrow_left_list);
 	if (Input.is_action_just_released("A_right")):
-		if (arrow_right_list.size() > 0):
-			var timing = arrow_right_list[0].get('timeTraveld')/arrow_right_list[0].get('time');
-			if (timing > 0.8 && timing < 0.95):
-				updatePoints(points+1);
-			remove_child(arrow_right_list[0]);
-			arrow_right_list.remove(0);
+		pressedRowEvent(arrow_right_list);
 			
 	while (timeCollapsed > frequenz):
 		print($UI/ArrowTop.position)
 		tick += 1;
 		timeCollapsed -= frequenz;
 		if (templateUp[tick%templateUp.length()] == '.'):
-			var instance = template.instance();
-			var endPos = $UI/ArrowTop.position;
-			instance.scale = $UI/ArrowTop.scale;
-			instance.set("start_pos", Vector2(endPos.x, endPos.y - 400))
-			instance.set("end_pos", Vector2(endPos.x, endPos.y + 50))
-			arrow_up_list.append(instance);
-			add_child(instance);
+			addArrow($UI/ArrowTop, arrow_up_list);
 		if (templateRight[tick%templateUp.length()] == '.'):
-			var instance = template.instance();
-			instance.scale = $UI/ArrowRight.scale;
-			var endPos = $UI/ArrowRight.position;
-			#instance.set("start_pos", Vector2(endPos.x, endPos.y - 400))
-			#instance.set("end_pos", Vector2(endPos.x, endPos.y + 50))
-			instance.set("start_pos", Vector2(endPos.x + 400, endPos.y))
-			instance.set("end_pos", Vector2(endPos.x - 50, endPos.y))
-			instance.rotation_degrees = 90;
-			arrow_right_list.append(instance);
-			add_child(instance);
+			addArrow($UI/ArrowRight, arrow_right_list);
 		if (templateLeft[tick%templateUp.length()] == '.'):
-			var instance = template.instance();
-			var endPos = $UI/ArrowLeft.position;
-			instance.scale = $UI/ArrowLeft.scale;
-			#instance.set("start_pos", Vector2(endPos.x, endPos.y - 400))
-			#instance.set("end_pos", Vector2(endPos.x, endPos.y + 50))
-			instance.set("start_pos", Vector2(endPos.x - 400, endPos.y))
-			instance.set("end_pos", Vector2(endPos.x + 50, endPos.y))
-			instance.rotation_degrees = -90;
-			arrow_left_list.append(instance);
-			add_child(instance);
-	while (arrow_up_list.size() > 0 && arrow_up_list[0].get('stopped') == true):
-		remove_child(arrow_up_list[0]);
-		arrow_up_list.remove(0);
-		pass;
-	while (arrow_right_list.size() > 0 && arrow_right_list[0].get('stopped') == true):
-		remove_child(arrow_right_list[0]);
-		arrow_right_list.remove(0);
-		pass;
-	while (arrow_left_list.size() > 0 && arrow_left_list[0].get('stopped') == true):
-		remove_child(arrow_left_list[0]);
-		arrow_left_list.remove(0);
-		pass;
+			addArrow($UI/ArrowLeft, arrow_left_list);
+	clearRowFromStopped(arrow_up_list)
+	clearRowFromStopped(arrow_left_list)
+	clearRowFromStopped(arrow_right_list)

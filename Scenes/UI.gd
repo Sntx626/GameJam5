@@ -1,7 +1,7 @@
 extends Node2D
-var templateUp =    ".        "
-var templateRight = "   .     "
-var templateLeft =  "      .  "
+var templateUp =    "..    .    "
+var templateRight = "   .       "
+var templateLeft =  ".     ..   "
 
 var bpm = 180;
 var showTime = 1000;

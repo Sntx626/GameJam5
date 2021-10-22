@@ -1,12 +1,12 @@
 extends Node2D
-var templateUp =    "."
-var templateRight = " "
-var templateLeft =  " "
+var templateUp =    ". .."
+var templateRight = " .  "
+var templateLeft =  " .  "
 
 var bpm = 104;
 
 var frequenz = 60000/bpm;
-var showTime = frequenz*2;
+var showTime = frequenz;
 
 
 var arrow_up_list = [];
@@ -62,9 +62,9 @@ func _process(delta):
 		timeCollapsed -= frequenz;
 		if (templateUp[tick%templateUp.length()] == '.'):
 			addArrow($UI/ArrowTop, arrow_up_list);
-		if (templateRight[tick%templateUp.length()] == '.'):
+		if (templateRight[tick%templateRight.length()] == '.'):
 			addArrow($UI/ArrowRight, arrow_right_list);
-		if (templateLeft[tick%templateUp.length()] == '.'):
+		if (templateLeft[tick%templateLeft.length()] == '.'):
 			addArrow($UI/ArrowLeft, arrow_left_list);
 	clearRowFromStopped(arrow_up_list)
 	clearRowFromStopped(arrow_left_list)

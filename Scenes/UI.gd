@@ -1,12 +1,12 @@
 extends Node2D
-var templateUp =    "..    .    "
-var templateRight = "   .       "
-var templateLeft =  ".     ..   "
+var templateUp =    "."
+var templateRight = " "
+var templateLeft =  " "
 
-var bpm = 180;
-var showTime = 1000;
+var bpm = 104;
 
 var frequenz = 60000/bpm;
+var showTime = frequenz*2;
 
 
 var arrow_up_list = [];

@@ -27,6 +27,7 @@ func add_to_currency(tier:int, amount:int):
 	else:
 		currencies.append(0)
 		add_to_currency(tier, amount)
+	$Label.text = get_text()
 
 func add_to_buyer(tier:int, amount:int):
 	if tier < len(buyer):
@@ -34,19 +35,4 @@ func add_to_buyer(tier:int, amount:int):
 	else:
 		buyer.append(0)
 		add_to_buyer(tier, amount)
-
-func _on_T0_pressed():
-	add_to_currency(0, 1)
-	$Label.text = get_text()
-
-func _on_T1_pressed():
-	add_to_buyer(0,1)
-	$Label.text = get_text()
-
-func _on_T2_pressed():
-	add_to_currency(1, 1)
-	$Label.text = get_text()
-
-func _on_T3_pressed():
-	add_to_buyer(1,1)
 	$Label.text = get_text()

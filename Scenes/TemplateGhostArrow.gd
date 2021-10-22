@@ -26,8 +26,21 @@ func getStagePoints():
 		if (pressTime < stages_offset[i]):
 			return stages_points[i]
 	return 0;
+
+func interpolate1D(start, end, x):
+	return start*(1-x) + end*x;
+
+func interpolate2D(start1, end1, start2, end2, x, y):
+	var s = interpolate1D(start1, end1, x)
+	var t = interpolate1D(start2, end2, x)
+	return interpolate1D(s, t, y)
+	
+
+
 func setStageColor():
 	var pressTime = abs(1-timeTraveld/time);
+	#if (pressTime  > stages_offset[stages_offset.size()] && pressTime < stages_offset[stages_offset.size()]+offset_time):	
+		
 	for i in range(stages_offset.size()):
 		if (pressTime < stages_offset[i]):
 			set_color(stages_color[i][0], stages_color[i][1], stages_color[i][2])

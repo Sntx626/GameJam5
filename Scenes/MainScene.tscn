@@ -10,8 +10,7 @@
 script = ExtResource( 1 )
 
 [node name="stageExample" type="Sprite" parent="."]
-position = Vector2( 522.649, 364.315 )
-scale = Vector2( 2, 2 )
+position = Vector2( 256, 144 )
 texture = ExtResource( 4 )
 
 [node name="RythmGame" parent="." instance=ExtResource( 2 )]

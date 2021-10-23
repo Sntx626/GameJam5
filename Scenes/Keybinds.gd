@@ -11,7 +11,7 @@ func _ready():
 
 # ! prestige and supremacy need to be reset
 func _process(delta):
-	if get_parent().data["score"] >= 1000:
+	if get_parent().data["score"] >= get_parent().calculate_target_points(get_parent().data["buyer"], get_parent().data["tier"]):
 		prestige = true
 	else:
 		prestige = false

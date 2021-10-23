@@ -17,14 +17,14 @@ texture = ExtResource( 4 )
 
 [node name="RythmGame" parent="." instance=ExtResource( 2 )]
 
+[node name="Clicker" parent="." instance=ExtResource( 3 )]
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 40.75, 45.25 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 hframes = 5
 script = ExtResource( 6 )
-
-[node name="Clicker" parent="." instance=ExtResource( 3 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0

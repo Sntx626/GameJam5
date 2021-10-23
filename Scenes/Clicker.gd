@@ -27,10 +27,13 @@ func _ready():
 
 func _process(delta):
 	if data["combo"] > 0:
-		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*data["combo"]*delta)
+		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*(1+(data["combo"]/100))*delta)
 	else:
 		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*delta)
 	buy_upgrades()
+
+func calculate_target_points(buyer, tier):
+	return (100*(buyer+1))*(tier+1)
 
 func buy_upgrades():
 	if data["buyer"] >= 4:
@@ -39,7 +42,7 @@ func buy_upgrades():
 			data["score"] = 0
 			data["buyer"] = 0
 			get_parent().load_song(data["tier"], data["buyer"])
-	elif data["score"] >= 1000:
+	elif data["score"] >= calculate_target_points(data["buyer"], data["tier"]):
 		if Input.is_action_pressed("prestige"):
 			add_to_buyer()
 			data["score"] = 0
@@ -64,10 +67,9 @@ var time_last = OS.get_ticks_usec()
 func add_to_currency(amount:float=1):
 	data["score"] += amount
 	update_text()
-	if amount > 0:
-		var temp = OS.get_ticks_usec()
-		clickt.append([amount, temp-time_last])
-		time_last = temp
+	var temp = OS.get_ticks_usec()
+	clickt.append([amount, temp-time_last])
+	time_last = temp
 
 func add_to_buyer(amount:float=1):
 	data["buyer"] += amount

@@ -26,10 +26,11 @@ func _process(delta):
 		sleep = 0
 
 func update_text():
-	var txt = ""
-	for i in range(len(currencies)):
-		txt += "T" + str(i) + ": " + str(currencies[i]) + "\n"
-	$Score.text = txt
+	#var txt = ""
+	#for i in range(len(currencies)):
+	#	txt += "T" + str(i) + ": " + str(currencies[i]) + "\n"
+	if len(currencies) > 0:
+		$Score/ScoreValue.text = str(currencies[0])
 
 func add_to_currency(tier:int, amount:int):
 	if tier < len(currencies):

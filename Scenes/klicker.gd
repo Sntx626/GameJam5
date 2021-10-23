@@ -4,6 +4,7 @@ var currencies = []
 var buyer = []
 
 func _ready():
+	add_to_currency(0, 0)
 	$Label.text = get_text()
 
 var sleep = 0

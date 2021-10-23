@@ -16,6 +16,7 @@ texture = ExtResource( 4 )
 [node name="RythmGame" parent="." instance=ExtResource( 2 )]
 
 [node name="Klicker" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0.561249, 0 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

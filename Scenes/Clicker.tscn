@@ -87,11 +87,11 @@ margin_bottom = 160.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 2 )
 text = "
-a, left
-w, up
-d, right
-p
-o"
+s, left
+d, up
+f, right
+j
+k"
 align = 2
 valign = 2
 __meta__ = {

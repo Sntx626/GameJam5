@@ -15,6 +15,11 @@ var arrow_up_list = [];
 var arrow_right_list = [];
 var arrow_left_list = [];
 
+
+var arrow_up_pressed = false;
+var arrow_right_pressed = false;
+var arrow_left_pressed = false;
+
 var template = load("res://Scenes/TemplateGhostArrow.tscn");
 func _ready():
 	updateCombo(0, false);
@@ -69,17 +74,35 @@ func clearRowFromStopped(row):
 		updateCombo(0, true)
 		row.remove(0)
 
-
+func setArrowColor(arrow, r, g, b):
+	arrow.modulate.r = r/255.0;
+	arrow.modulate.g = g/255.0;
+	arrow.modulate.b = b/255.0;
 
 func _process(delta):
 	timeCollapsed += delta * 1000;
-	if (Input.is_action_just_released("A_up")):
+	if (Input.is_action_just_pressed("A_up") && not arrow_up_pressed):
+		setArrowColor($UI/ArrowTop, 66, 179, 245);
+		arrow_up_pressed = true;
 		pressedRowEvent(arrow_up_list);
-	if (Input.is_action_just_released("A_left")):
+	if (Input.is_action_just_pressed("A_left") && not arrow_left_pressed):
+		setArrowColor($UI/ArrowLeft, 66, 179, 245);
+		arrow_left_pressed = true;
 		pressedRowEvent(arrow_left_list);
-	if (Input.is_action_just_released("A_right")):
+	if (Input.is_action_just_pressed("A_right") && not arrow_right_pressed):
+		setArrowColor($UI/ArrowRight, 66, 179, 245);
+		arrow_right_pressed = true;
 		pressedRowEvent(arrow_right_list);
-	
+		
+	if (Input.is_action_just_released("A_up") && arrow_up_pressed):
+		setArrowColor($UI/ArrowTop, 255, 255, 255);
+		arrow_up_pressed = false;
+	if (Input.is_action_just_released("A_left") && arrow_left_pressed):
+		setArrowColor($UI/ArrowLeft, 255, 255, 255);
+		arrow_left_pressed = false;
+	if (Input.is_action_just_released("A_right") && arrow_right_pressed):
+		setArrowColor($UI/ArrowRight, 255, 255, 255);
+		arrow_right_pressed = false;
 	while (timeCollapsed > frequenz):
 		tick += 1;
 		timeCollapsed -= frequenz;

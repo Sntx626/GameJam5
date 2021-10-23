@@ -1,12 +1,12 @@
 extends Node2D
-var templateUp =    "."
-var templateRight = " "
-var templateLeft =  " "
+var templateUp =    ". . .   "
+var templateRight = "      . "
+var templateLeft =  "      . "
 
-var bpm = 104;
-
+var bpm = 208;
+var showTimeBeat = 3;
 var frequenz = 60000/bpm;
-var showTime = frequenz*2;
+var showTime = frequenz*showTimeBeat;
 
 
 var arrow_up_list = [];
@@ -47,6 +47,8 @@ func clearRowFromStopped(row):
 		remove_child(row[0])
 		row.remove(0)
 
+
+
 func _process(delta):
 	timeCollapsed += delta * 1000;
 	if (Input.is_action_just_released("A_up")):
@@ -59,12 +61,15 @@ func _process(delta):
 	while (timeCollapsed > frequenz):
 		tick += 1;
 		timeCollapsed -= frequenz;
-		if (templateUp[tick%templateUp.length()] == '.'):
+		if (templateUp[(tick+showTimeBeat)%templateUp.length()] == '.'):
 			addArrow($UI/ArrowTop, arrow_up_list);
-		if (templateRight[tick%templateUp.length()] == '.'):
+		if (templateRight[(tick+showTimeBeat)%templateUp.length()] == '.'):
 			addArrow($UI/ArrowRight, arrow_right_list);
-		if (templateLeft[tick%templateUp.length()] == '.'):
+		if (templateLeft[(tick+showTimeBeat)%templateUp.length()] == '.'):
 			addArrow($UI/ArrowLeft, arrow_left_list);
+		var audio_stream = get_parent().get("audio_stream");
+		if (not audio_stream.playing):
+			audio_stream.play(0)
 	clearRowFromStopped(arrow_up_list)
 	clearRowFromStopped(arrow_left_list)
 	clearRowFromStopped(arrow_right_list)

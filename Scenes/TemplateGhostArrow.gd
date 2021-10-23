@@ -50,6 +50,15 @@ func setStageColor():
 			return
 	set_color(255, 255, 255);
 
+func getStageColor():
+	var pressTime = abs(1-timeTraveld/time);
+	#if (pressTime  > stages_offset[stages_offset.size()] && pressTime < stages_offset[stages_offset.size()]+offset_time):	
+		
+	for i in range(stages_offset.size()):
+		if (pressTime < stages_offset[i]):
+			return Vector3(stages_color[i][0], stages_color[i][1], stages_color[i][2])
+	return Vector3(255, 255, 255)
+	
 
 func set_color(r, g, b):
 	modulate.r = r/255.0;

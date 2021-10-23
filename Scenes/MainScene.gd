@@ -3,7 +3,7 @@ extends Node2D
 var bpm = 52;
 var points = 0
 
-var klicker = null
+var clicker = null
 var song_audio_stream = [];
 var main_instrument_audio_stream;
 var main_instrument_playtime = 2*1000;
@@ -13,7 +13,7 @@ var play = false;
 
 
 func _ready():
-	klicker = $Klicker
+	clicker = $Clicker
 	song_audio_stream.append($AudioStreamBass)
 	song_audio_stream.append($AudioStreamLead)
 	song_audio_stream.append($AudioStreamHiHats)
@@ -46,4 +46,4 @@ func hitNode():
 
 func _notification(event):
 	if event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST or event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		$Klicker.save_data()
+		$Clicker.save_data()

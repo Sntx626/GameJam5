@@ -7,17 +7,10 @@
     },
     "beatmaps": [
         {
-            "instrument": "HiHats.wav",
-            "left":   ".                               ",
-            "center": " . . . . . . . . . . . . . . . .",
-            "right":  "                .               ",
-            "beats_to_play": 3
-        },
-        {
-            "instrument": "Kick.wav",
-            "left":   " .     .   .     .     .   .    ",
-            "center": "   .     .     .   .     .     .",
-            "right":  ".    .       .  .    .       .  ",
+            "instrument": "Rhodes.wav",
+            "left":   " .                   .           .                   .           .                   .           .                   .          ",
+            "center": "                                                                                                                             .  ",
+            "right":  "     .           .                   .           .                   .           .                   .           .              ",
             "beats_to_play": 3
         },
         {
@@ -35,12 +28,20 @@
             "beats_to_play": 3
         },
         {
-            "instrument": "Rhodes.wav",
-            "left":   " .                   .           .                   .           .                   .           .                   .          ",
-            "center": "                                                                                                                             .  ",
-            "right":  "     .           .                   .           .                   .           .                   .           .              ",
+            "instrument": "HiHats.wav",
+            "left":   ".                               ",
+            "center": " . . . . . . . . . . . . . . . .",
+            "right":  "                .               ",
+            "beats_to_play": 3
+        },
+        {
+            "instrument": "Kick.wav",
+            "left":   " .     .   .     .     .   .    ",
+            "center": "   .     .     .   .     .     .",
+            "right":  ".    .       .  .    .       .  ",
             "beats_to_play": 3
         }
+        
     ],
     "ambienct_sounds": "Regen.wav"
 }

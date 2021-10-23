@@ -61,6 +61,8 @@ func load_main_instrument(i:int=0):
 		song_audio_stream[j].volume_db = -10;
 	for j in range(current_beatmap, song_audio_stream.size()):
 		song_audio_stream[j].volume_db = -80;
+	if (play):
+		song_audio_stream[current_beatmap].volume_db = -10;
 	$RythmGame.set("templateUp", current_song["beatmaps"][current_beatmap]["center"])
 	$RythmGame.set("templateRight", current_song["beatmaps"][current_beatmap]["right"])
 	$RythmGame.set("templateLeft", current_song["beatmaps"][current_beatmap]["left"])
@@ -100,7 +102,7 @@ func failNode():
 		last_fail = time_beetween_failure;
 	if (play):
 		play = false;
-		song_audio_stream[0].volume_db = -80;
+		song_audio_stream[current_beatmap].volume_db = -80;
 
 func hitNode():
 	if (not play):

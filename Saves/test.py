@@ -1,27 +1,19 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import json
 
+with open("clicks.dat") as f:
+    data = json.load(f)
 
-class Node(object):
-    def __init__(self):
-        self.currency_t0 = 0
+x = []
+y = []
 
-    def klick(self):
-        self.currency_t0 += 1
-    
-    def print_stats(self):
-        text = "#"*10 + "\n"
-        text += "Currency: " + str(self.currency_t0) + "\n"
-        text += "#"*10
-        print(text)
+for i in data:
+    x.append(i[0])
+    y.append(i[1])
 
-def main():
-    n = Node()
-    try:
-        while True:
-            input()
-            n.klick()
-            n.print_stats()
-    except KeyboardInterrupt:
-        print("bye")
+xpoints = np.array(x)
+ypoints = np.array(y)
 
-if __name__ == "__main__":
-    main()
+plt.plot(xpoints, ypoints)
+plt.show()

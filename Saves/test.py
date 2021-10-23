@@ -9,10 +9,9 @@ x = []
 y = []
 
 for i in data:
-    x.append(i[0])
-    y.append(i[1])
+    y.append(i[0])
 
-xpoints = np.array(x)
+xpoints = np.array(range(len(data)))
 ypoints = np.array(y)
 
 plt.plot(xpoints, ypoints)

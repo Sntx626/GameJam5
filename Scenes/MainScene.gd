@@ -43,6 +43,7 @@ func get_song(index:int) -> Dictionary:
 						stream.volume_db = -80;
 					for i in range(len(song["beatmaps"])):
 						song_audio_stream[i].stream = load("res://Songs/"+d+"/sounds/"+song["beatmaps"][i]["instrument"])
+						print("loaded:", song["beatmaps"][i]["instrument"])
 					$RythmGame.set("bpm", song["metadata"]["song_bpm"])
 					$RythmGame.set_stop(false);
 					$RythmGame.restart_song();

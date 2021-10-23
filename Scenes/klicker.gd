@@ -1,26 +1,35 @@
 extends Node2D
 
+# score
 var currencies = []
 var buyer = []
 
+# prestige
+var chills = []
+var chiller = []
+
+# supremacy
+var genres = []
+var albums = []
+
 func _ready():
 	add_to_currency(0, 0)
-	$Label.text = get_text()
+	update_text()
 
 var sleep = 0
 func _process(delta):
 	sleep += delta
 	if sleep > 1:
 		for i in range(len(buyer)):
-			add_to_currency(i, buyer[i])
+			if buyer[i] > 0:
+				add_to_currency(i, buyer[i])
 		sleep = 0
-		$Label.text = get_text()
 
-func get_text():
+func update_text():
 	var txt = ""
 	for i in range(len(currencies)):
 		txt += "T" + str(i) + ": " + str(currencies[i]) + "\n"
-	return txt
+	$Score.text = txt
 
 func add_to_currency(tier:int, amount:int):
 	if tier < len(currencies):
@@ -28,7 +37,7 @@ func add_to_currency(tier:int, amount:int):
 	else:
 		currencies.append(0)
 		add_to_currency(tier, amount)
-	$Label.text = get_text()
+	update_text()
 
 func add_to_buyer(tier:int, amount:int):
 	if tier < len(buyer):
@@ -36,4 +45,4 @@ func add_to_buyer(tier:int, amount:int):
 	else:
 		buyer.append(0)
 		add_to_buyer(tier, amount)
-	$Label.text = get_text()
+	update_text()

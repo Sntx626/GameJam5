@@ -21,6 +21,7 @@ var arrow_right_pressed = false;
 var arrow_left_pressed = false;
 
 var template = load("res://Scenes/TemplateGhostArrow.tscn");
+var template_particle = load("res://Scenes/ArrowParticel.tscn");
 func _ready():
 	updateCombo(0, false);
 	pass
@@ -60,6 +61,8 @@ func pressedRowEvent(row):
 			get_parent().klicker.add_to_currency(0,points)
 			if (points > 0):
 				get_parent().hitNode();
+				var part = template_particle.instance();
+				add_child(part)
 			if (points == row[0].get("stages_points")[0]):
 				updateCombo(combo + 1, true)
 			elif (points == 0):

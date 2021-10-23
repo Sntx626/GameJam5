@@ -1,16 +1,13 @@
 extends Node2D
-var templateUp =    ".   . . .   . .."
-var templateRight = "  .       .     "
-var templateLeft =  "  .       .     "
+var templateUp =    "."
+var templateRight = " "
+var templateLeft =  " "
 
-var bpm = 52*4;
+var bpm = 104;
 
 var frequenz = 60000/bpm;
 var showTime = frequenz*2;
 
-var upP = false;
-var leftP = false;
-var rightP = false;
 
 var arrow_up_list = [];
 var arrow_right_list = [];
@@ -35,7 +32,7 @@ func addArrow(parent, list):
 		instance.set("end_pos", Vector2(endPos.x, endPos.y))
 		list.append(instance);
 		add_child(instance);
-	
+
 func pressedRowEvent(row):
 	if (row.size() > 0):
 		var points = row[0].getStagePoints();
@@ -52,30 +49,21 @@ func clearRowFromStopped(row):
 
 func _process(delta):
 	timeCollapsed += delta * 1000;
-	if (Input.is_action_just_pressed("A_up") && not upP):
-		upP = true;
+	if (Input.is_action_just_released("A_up")):
 		pressedRowEvent(arrow_up_list);
-	if (Input.is_action_just_pressed("A_left") && not leftP):
-		leftP = true;
+	if (Input.is_action_just_released("A_left")):
 		pressedRowEvent(arrow_left_list);
-	if (Input.is_action_just_pressed("A_right") && not rightP):
-		rightP = true;
+	if (Input.is_action_just_released("A_right")):
 		pressedRowEvent(arrow_right_list);
-	if (Input.is_action_just_released("A_up") && upP):
-		upP = false;
-	if (Input.is_action_just_released("A_left") && leftP):
-		leftP = false;
-	if (Input.is_action_just_released("A_right") && rightP):
-		rightP = false;
+	
 	while (timeCollapsed > frequenz):
-		print($UI/ArrowTop.position)
 		tick += 1;
 		timeCollapsed -= frequenz;
 		if (templateUp[tick%templateUp.length()] == '.'):
 			addArrow($UI/ArrowTop, arrow_up_list);
-		if (templateRight[tick%templateRight.length()] == '.'):
+		if (templateRight[tick%templateUp.length()] == '.'):
 			addArrow($UI/ArrowRight, arrow_right_list);
-		if (templateLeft[tick%templateLeft.length()] == '.'):
+		if (templateLeft[tick%templateUp.length()] == '.'):
 			addArrow($UI/ArrowLeft, arrow_left_list);
 	clearRowFromStopped(arrow_up_list)
 	clearRowFromStopped(arrow_left_list)

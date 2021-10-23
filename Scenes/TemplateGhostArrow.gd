@@ -37,8 +37,6 @@ func interpolate2D(start1, end1, start2, end2, x, y):
 	var s = interpolate1D(start1, end1, x)
 	var t = interpolate1D(start2, end2, x)
 	return interpolate1D(s, t, y)
-	
-
 
 func setStageColor():
 	var pressTime = abs(1-timeTraveld/time);
@@ -79,6 +77,6 @@ func _process(delta):
 		dir = dir * procentage;
 		dir += start_pos;
 		position = dir;
-		modulate.a = (procentage) if (procentage < 1) else 0;
+		modulate.a = (0.2 + (procentage*4)/5) if (procentage < 1) else 0;
 		if (timeTraveld > time+time*offset_time):
 			stopped = true;

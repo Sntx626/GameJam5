@@ -18,7 +18,6 @@ var arrow_up_list = [];
 var arrow_right_list = [];
 var arrow_left_list = [];
 
-
 var arrow_up_pressed = false;
 var arrow_right_pressed = false;
 var arrow_left_pressed = false;
@@ -47,8 +46,12 @@ func addArrow(parent, list):
 		instance.scale = parent.scale;
 		instance.rotation_degrees = parent.rotation_degrees;
 		instance.set("time", getShowTime())
-		instance.set("start_pos", Vector2(endPos.x, endPos.y - 248))
 		instance.set("end_pos", Vector2(endPos.x, endPos.y))
+		if endPos.x > 260:
+			endPos.x -= 32
+		elif endPos.x < 252:
+			endPos.x += 32
+		instance.set("start_pos", Vector2(endPos.x, endPos.y - 196))
 		list.append(instance);
 		add_child(instance);
 
@@ -56,8 +59,10 @@ func pressedRowEvent(row):
 	if (row.size() > 0):
 		var points = row[0].getStagePoints();
 		if (not points == -1):
-			get_parent().clicker.add_to_currency(points)
 			if (points > 0):
+				var replays = int(get_parent().clicker.data["tier"] + 1) / len(get_parent().list_files_in_dir("res://Songs"))
+				var multi = (replays) if (replays > 0) else 1;
+				get_parent().clicker.add_to_currency(points*multi)
 				get_parent().hitNode();
 				var part = template_particle.instance();
 				add_child(part)

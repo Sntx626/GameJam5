@@ -27,7 +27,7 @@ func _ready():
 
 func _process(delta):
 	if data["combo"] > 0:
-		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*(1+(data["combo"]/100))*delta)
+		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*(1+(data["combo"]/10))*delta)
 	else:
 		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*delta)
 	buy_upgrades()

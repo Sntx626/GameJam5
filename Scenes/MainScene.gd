@@ -43,3 +43,7 @@ func hitNode():
 		play = true;
 		main_instrument_audio_stream.volume_db = -10;
 	pass;
+
+func _notification(event):
+	if event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST or event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		$Klicker.save_data()

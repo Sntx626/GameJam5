@@ -1,24 +1,11 @@
 extends Node2D
 
-#JSON.print(my_dictionary, "\t")
-
-#var data = {
-#	"score": {
-#		"currencies": [],	# e.g. scores
-#		"buyer": []			# e.g. passive score
-#	},
-#	"prestige": {
-#		"currencies": [], 	# e.g. chills
-#		"buyer": []			# e.g. chiller
-#	},
-#	"supremacy": {
-#		"currencies": [],	# e.g. genres
-#		"buyer": []			# e.g. albums
-#	}
-#}
 func load_data():
 	var file = File.new()
-	file.open("res://Saves/save_game.dat", File.READ)
+	if file.file_exists("res://Saves/save_game.dat"):
+		file.open("res://Saves/save_game.dat", File.READ)
+	else:
+		file.open("res://Saves/default_save_game.dat", File.READ)
 	var p = JSON.parse(file.get_as_text())
 	if typeof(p.result) == TYPE_DICTIONARY:
 		data = p.result
@@ -31,14 +18,12 @@ func save_data():
 	file.open("res://Saves/save_game.dat", File.WRITE)
 	file.store_string(JSON.print(data, "\t"))
 	file.close()
-	print("saved")
 
 var data = null
 
 func _ready():
 	load_data()
 	add_to_currency(0, 0)
-	update_text()
 
 var sleep = 0
 func _process(delta):
@@ -50,9 +35,6 @@ func _process(delta):
 		sleep = 0
 
 func update_text():
-	#var txt = ""
-	#for i in range(len(currencies)):
-	#	txt += "T" + str(i) + ": " + str(currencies[i]) + "\n"
 	if len(data["score"]["currencies"]) > 0:
 		$Score/ScoreValue.text = str(data["score"]["currencies"][0])
 
@@ -70,4 +52,20 @@ func add_to_buyer(tier:int, amount:int):
 	else:
 		data["score"]["buyer"].append(0)
 		add_to_buyer(tier, amount)
+	update_text()
+
+func _del_save_game():
+	var file = File.new()
+	file.open("res://Saves/default_save_game.dat", File.READ)
+	var p = JSON.parse(file.get_as_text())
+	if typeof(p.result) == TYPE_DICTIONARY:
+		data = p.result
+		print("reset")
+	else:
+		push_error("Unexpected results.")
+	file.close()
+	
+	var dir = Directory.new()
+	dir.remove("res://Saves/save_game.dat")
+	
 	update_text()

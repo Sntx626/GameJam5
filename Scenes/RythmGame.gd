@@ -6,6 +6,8 @@ var templateLeft =  "                               ."
 var bpm = 208;
 var showTimeBeat = 3;
 
+var restart_next_tick = true;
+var stop = true;
 
 var frequenz = 60000/bpm;
 var showTime = frequenz*showTimeBeat;
@@ -30,6 +32,12 @@ var timeCollapsed = 0;
 var tick = 0;
 
 var combo = 0;
+
+func restart_song():
+	restart_next_tick = true;
+func set_stop(newStop):
+	stop = newStop;
+	clearAll();
 
 func addArrow(parent, list):
 		var instance = template.instance();
@@ -71,43 +79,61 @@ func setArrowColor(arrow, r, g, b):
 	arrow.modulate.g = g/255.0;
 	arrow.modulate.b = b/255.0;
 
+func clearAll():
+	while (arrow_left_list.size() > 0):
+		remove_child(arrow_left_list[0])
+		arrow_left_list.remove(0)
+	while (arrow_right_list.size() > 0):
+		remove_child(arrow_right_list[0])
+		arrow_right_list.remove(0)
+	while (arrow_up_list.size() > 0):
+		remove_child(arrow_up_list[0])
+		arrow_up_list.remove(0)
+
 func _process(delta):
-	timeCollapsed += delta * 1000;
-	if (Input.is_action_just_pressed("A_up") && not arrow_up_pressed):
-		setArrowColor($UI/ArrowTop, 66, 179, 245);
-		arrow_up_pressed = true;
-		pressedRowEvent(arrow_up_list);
-	if (Input.is_action_just_pressed("A_left") && not arrow_left_pressed):
-		setArrowColor($UI/ArrowLeft, 66, 179, 245);
-		arrow_left_pressed = true;
-		pressedRowEvent(arrow_left_list);
-	if (Input.is_action_just_pressed("A_right") && not arrow_right_pressed):
-		setArrowColor($UI/ArrowRight, 66, 179, 245);
-		arrow_right_pressed = true;
-		pressedRowEvent(arrow_right_list);
-		
-	if (Input.is_action_just_released("A_up") && arrow_up_pressed):
-		setArrowColor($UI/ArrowTop, 255, 255, 255);
-		arrow_up_pressed = false;
-	if (Input.is_action_just_released("A_left") && arrow_left_pressed):
-		setArrowColor($UI/ArrowLeft, 255, 255, 255);
-		arrow_left_pressed = false;
-	if (Input.is_action_just_released("A_right") && arrow_right_pressed):
-		setArrowColor($UI/ArrowRight, 255, 255, 255);
-		arrow_right_pressed = false;
-	while (timeCollapsed > frequenz):
-		tick += 1;
-		timeCollapsed -= frequenz;
-		if (templateUp[(tick+showTimeBeat)%templateUp.length()] == '.'):
-			addArrow($UI/ArrowTop, arrow_up_list);
-		if (templateRight[(tick+showTimeBeat)%templateRight.length()] == '.'):
-			addArrow($UI/ArrowRight, arrow_right_list);
-		if (templateLeft[(tick+showTimeBeat)%templateLeft.length()] == '.'):
-			addArrow($UI/ArrowLeft, arrow_left_list);
-		var song_audio_stream = get_parent().get("song_audio_stream");
-		#for audio_stream in song_audio_stream:
-		#	if (not audio_stream.playing):
-		#		audio_stream.play(0)
-	clearRowFromStopped(arrow_up_list)
-	clearRowFromStopped(arrow_left_list)
-	clearRowFromStopped(arrow_right_list)
+	if not stop:
+		timeCollapsed += delta * 1000;
+		if (restart_next_tick):
+			restart_next_tick = false;
+			tick = 0;
+			timeCollapsed = 0;
+			clearAll();
+			get_parent().startCall();
+		if (Input.is_action_just_pressed("A_up") && not arrow_up_pressed):
+			setArrowColor($ArrowTop, 66, 179, 245);
+			arrow_up_pressed = true;
+			pressedRowEvent(arrow_up_list);
+		if (Input.is_action_just_pressed("A_left") && not arrow_left_pressed):
+			setArrowColor($ArrowLeft, 66, 179, 245);
+			arrow_left_pressed = true;
+			pressedRowEvent(arrow_left_list);
+		if (Input.is_action_just_pressed("A_right") && not arrow_right_pressed):
+			setArrowColor($ArrowRight, 66, 179, 245);
+			arrow_right_pressed = true;
+			pressedRowEvent(arrow_right_list);
+			
+		if (Input.is_action_just_released("A_up") && arrow_up_pressed):
+			setArrowColor($ArrowTop, 255, 255, 255);
+			arrow_up_pressed = false;
+		if (Input.is_action_just_released("A_left") && arrow_left_pressed):
+			setArrowColor($ArrowLeft, 255, 255, 255);
+			arrow_left_pressed = false;
+		if (Input.is_action_just_released("A_right") && arrow_right_pressed):
+			setArrowColor($ArrowRight, 255, 255, 255);
+			arrow_right_pressed = false;
+		while (timeCollapsed > frequenz):
+			tick += 1;
+			timeCollapsed -= frequenz;
+			if (templateUp[(tick+showTimeBeat)%templateUp.length()] == '.'):
+				addArrow($ArrowTop, arrow_up_list);
+			if (templateRight[(tick+showTimeBeat)%templateRight.length()] == '.'):
+				addArrow($ArrowRight, arrow_right_list);
+			if (templateLeft[(tick+showTimeBeat)%templateLeft.length()] == '.'):
+				addArrow($ArrowLeft, arrow_left_list);
+			var song_audio_stream = get_parent().get("song_audio_stream");
+			#for audio_stream in song_audio_stream:
+			#	if (not audio_stream.playing):
+			#		audio_stream.play(0)
+		clearRowFromStopped(arrow_up_list)
+		clearRowFromStopped(arrow_left_list)
+		clearRowFromStopped(arrow_right_list)

@@ -3,14 +3,14 @@
 [ext_resource path="res://Scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/RythmGame.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Clicker.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/stageExample.png" type="Texture" id=4]
+[ext_resource path="res://Assets/background1.png" type="Texture" id=4]
 [ext_resource path="res://Sounds/GameJamLofi1_52BPM.mp3" type="AudioStream" id=5]
-[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Bass.wav" type="AudioStream" id=6]
-[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Lead.wav" type="AudioStream" id=7]
-[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 HiHats.wav" type="AudioStream" id=8]
-[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Kick+Snare.wav" type="AudioStream" id=9]
-[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Rhodes.wav" type="AudioStream" id=10]
-[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Regen.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Bass.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lead.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/HiHats.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Kick.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Rhodeswav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Regen.wav" type="AudioStream" id=11]
 [ext_resource path="res://Sounds/FailSound.wav" type="AudioStream" id=12]
 
 [node name="MainScene" type="Node2D"]
@@ -28,32 +28,32 @@ texture = ExtResource( 4 )
 stream = ExtResource( 5 )
 volume_db = -10.0
 
-[node name="AudioStreamRhodes" type="AudioStreamPlayer" parent="."]
+[node name="AudioStream1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -10.0
 autoplay = true
 
-[node name="AudioStreamRegen" type="AudioStreamPlayer" parent="."]
+[node name="AudioStream2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
 
-[node name="AudioStreamKick" type="AudioStreamPlayer" parent="."]
+[node name="AudioStream3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -10.0
 autoplay = true
 
-[node name="AudioStreamLead" type="AudioStreamPlayer" parent="."]
+[node name="AudioStream4" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -10.0
 autoplay = true
 
-[node name="AudioStreamHiHats" type="AudioStreamPlayer" parent="."]
+[node name="AudioStream5" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -80.0
 autoplay = true
 
-[node name="AudioStreamBass" type="AudioStreamPlayer" parent="."]
+[node name="AudioStream6" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
 autoplay = true

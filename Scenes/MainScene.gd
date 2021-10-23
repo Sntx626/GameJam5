@@ -5,23 +5,95 @@ var points = 0
 
 var clicker = null
 var song_audio_stream = [];
-var main_instrument_audio_stream;
 var main_instrument_playtime = 2*1000;
 var time_beetween_failure = 1 * 1000;
 var last_fail = 0;
 var play = false;
 
+var index_main_instrument = 0;
+var song_index = 0;
+var song_instruments = [[
+	preload("res://Sounds/GameJamLofi1_52Bpm/HiHats.wav"),
+	preload("res://Sounds/GameJamLofi1_52Bpm/Kick.wav"),
+	preload("res://Sounds/GameJamLofi1_52Bpm/Bass.wav"),
+	preload("res://Sounds/GameJamLofi1_52Bpm/Lead.wav"),
+	preload("res://Sounds/GameJamLofi1_52Bpm/Regen.wav"),
+	preload("res://Sounds/GameJamLofi1_52Bpm/Rhodes.wav")
+]]
+var song_beatmaps = [[
+	[
+		". . . . . . . . . . . . . . . . ",
+		"               .                ",
+		"                               ."
+	],
+	[
+		".     ",
+		"  .   ",
+		"    . "
+	],
+	[
+		" ",
+		" ",
+		" "
+	],
+	[
+		" ",
+		" ",
+		" "
+	],
+	[
+		" ",
+		" ",
+		" "
+	],
+	[
+		" ",
+		" ",
+		" "
+	]
+]]
+
+func add_instrument():
+	load_main_instrument(index_main_instrument+1)
+		
+func load_main_instrument(i):
+	index_main_instrument = i;
+	for j in range(index_main_instrument):
+		song_audio_stream[j].volume_db = -10;
+	for j in range(index_main_instrument, song_audio_stream.size()):
+		song_audio_stream[j].volume_db = -80;
+	$RythmGame.set("templateUp", song_beatmaps[song_index][index_main_instrument][0])
+	$RythmGame.set("templateRight", song_beatmaps[song_index][index_main_instrument][1])
+	$RythmGame.set("templateLeft", song_beatmaps[song_index][index_main_instrument][2])
+	
+func load_song(i):
+	$RythmGame.set_stop(true);
+	song_index = 0;
+	for stream in song_audio_stream:
+		stream.volume_db = -80;
+	for j in range(song_instruments[i].size()):
+		song_audio_stream[j].stream = song_instruments[i][j];
+	load_main_instrument(index_main_instrument)
+	$RythmGame.set_stop(false);
+	$RythmGame.restart_song();
+
+func tryReset():
+	pass;
+
+func startCall():
+	for j in range(song_instruments[song_index].size()):
+		song_audio_stream[j].play(0);
+	pass;
 
 func _ready():
 	clicker = $Clicker
-	song_audio_stream.append($AudioStreamBass)
-	song_audio_stream.append($AudioStreamLead)
-	song_audio_stream.append($AudioStreamHiHats)
-	song_audio_stream.append($AudioStreamKick)
-	song_audio_stream.append($AudioStreamRegen)
-	song_audio_stream.append($AudioStreamRhodes)
-	main_instrument_audio_stream = $AudioStreamHiHats
-	main_instrument_audio_stream.volume_db = -80;
+	song_audio_stream.append($AudioStream1)
+	song_audio_stream.append($AudioStream2)
+	song_audio_stream.append($AudioStream3)
+	song_audio_stream.append($AudioStream4)
+	song_audio_stream.append($AudioStream5)
+	song_audio_stream.append($AudioStream6)
+	load_song(0);
 
 func _process(delta):
 	if not last_fail == 0:
@@ -36,12 +108,12 @@ func failNode():
 		last_fail = time_beetween_failure;
 	if (play):
 		play = false;
-		main_instrument_audio_stream.volume_db = -80;
+		song_audio_stream[index_main_instrument].volume_db = -80;
 
 func hitNode():
 	if (not play):
 		play = true;
-		main_instrument_audio_stream.volume_db = -10;
+		song_audio_stream[index_main_instrument].volume_db = -10;
 	pass;
 
 func _notification(event):

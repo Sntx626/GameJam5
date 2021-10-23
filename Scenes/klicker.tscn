@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/klicker.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Klicker.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/fira_code_medium.tres" type="DynamicFont" id=2]
 
 [node name="Klicker" type="Node2D"]
@@ -37,6 +37,7 @@ __meta__ = {
 }
 
 [node name="ComboLabel" type="Label" parent="Score"]
+visible = false
 margin_left = 185.0
 margin_right = 313.0
 margin_bottom = 20.0

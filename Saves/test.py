@@ -12,7 +12,7 @@ temp = 0
 for i in data:
     #temp += i[1]*0.000001
     #x.append(temp)
-    y.append(i[0]*1000)
+    y.append(i[1])
 
 xpoints = np.array(range(len(data)))
 ypoints = np.array(y)

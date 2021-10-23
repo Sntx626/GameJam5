@@ -1,12 +1,12 @@
 extends Node2D
-var templateUp =    ". .."
-var templateRight = " .  "
-var templateLeft =  " .  "
+var templateUp =    ".   . . .   . .."
+var templateRight = "  .       .     "
+var templateLeft =  "  .       .     "
 
-var bpm = 104;
+var bpm = 52*4;
 
 var frequenz = 60000/bpm;
-var showTime = frequenz;
+var showTime = frequenz*2;
 
 var upP = false;
 var leftP = false;
@@ -31,7 +31,7 @@ func addArrow(parent, list):
 		instance.scale = parent.scale;
 		instance.rotation_degrees = parent.rotation_degrees;
 		instance.set("time", showTime)
-		instance.set("start_pos", Vector2(endPos.x, endPos.y - 400))
+		instance.set("start_pos", Vector2(endPos.x, endPos.y - 248))
 		instance.set("end_pos", Vector2(endPos.x, endPos.y))
 		list.append(instance);
 		add_child(instance);

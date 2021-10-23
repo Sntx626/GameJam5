@@ -27,9 +27,9 @@ func _ready():
 
 func _process(delta):
 	if data["combo"] > 0:
-		add_to_currency((data["tier"]+1)*data["buyer"]*data["combo"]*delta)
+		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*data["combo"]*delta)
 	else:
-		add_to_currency((data["tier"]+1)*data["buyer"]*delta)
+		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*delta)
 	buy_upgrades()
 
 func buy_upgrades():
@@ -38,12 +38,12 @@ func buy_upgrades():
 			increase_tier()
 			data["score"] = 0
 			data["buyer"] = 0
-			get_parent().load_main_instrument()
+			get_parent().load_song(data["tier"], data["buyer"])
 	elif data["score"] >= 1000:
 		if Input.is_action_pressed("prestige"):
 			add_to_buyer()
 			data["score"] = 0
-			get_parent().add_instrument()
+			get_parent().load_main_instrument(data["buyer"])
 
 func update_text():
 	$Score/ScoreValue.text = str(int(data["score"]))

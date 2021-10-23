@@ -81,8 +81,11 @@ func _ready():
 	song_audio_stream.append($AudioStream4)
 	song_audio_stream.append($AudioStream5)
 	song_audio_stream.append($AudioStream6)
-	current_song = get_song(int($Clicker.data["tier"])%len(list_files_in_dir("res://Songs")));
-	load_main_instrument($Clicker.data["buyer"])
+	load_song($Clicker.data["tier"], $Clicker.data["buyer"])
+
+func load_song(song_index, beatmap_index):
+	current_song = get_song(int(song_index)%len(list_files_in_dir("res://Songs")));
+	load_main_instrument(beatmap_index)
 
 func _process(delta):
 	if not last_fail == 0:

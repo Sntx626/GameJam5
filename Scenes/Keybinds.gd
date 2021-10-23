@@ -16,7 +16,7 @@ func _process(delta):
 	else:
 		prestige = false
 	
-	if get_parent().data["buyer"] >= 10:
+	if get_parent().data["buyer"]+1 > len(get_parent().get_parent().current_song["beatmaps"]):
 		supremacy = true
 	else:
 		supremacy = false
@@ -26,13 +26,12 @@ func update():
 	var button_text = default_button_text
 	var key_text = default_key_text
 	
-	if prestige:
-		button_text += "\np"
-		key_text += "\nPrestige:"
-	
 	if supremacy:
 		button_text += "\no"
 		key_text += "\nSupremacy:"
+	elif prestige:
+		button_text += "\np"
+		key_text += "\nPrestige:"
 	
 	$KeybindsButtons.text = button_text
 	$KeybindsKeys.text = key_text

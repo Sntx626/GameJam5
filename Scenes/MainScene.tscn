@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/RythmGame.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Clicker.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/stageExample.png" type="Texture" id=4]
+[ext_resource path="res://Assets/spritesheet1.png" type="Texture" id=4]
 [ext_resource path="res://Sounds/GameJamLofi1_52BPM.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Bass.wav" type="AudioStream" id=6]
 [ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Lead.wav" type="AudioStream" id=7]
@@ -12,13 +12,94 @@
 [ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Rhodes.wav" type="AudioStream" id=10]
 [ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Regen.wav" type="AudioStream" id=11]
 [ext_resource path="res://Sounds/FailSound.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/background1.png" type="Texture" id=13]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 224, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="stageExample" type="Sprite" parent="."]
 position = Vector2( 256, 144 )
-texture = ExtResource( 4 )
+texture = ExtResource( 13 )
 
 [node name="RythmGame" parent="." instance=ExtResource( 2 )]
 
@@ -61,3 +142,15 @@ autoplay = true
 [node name="AudioStreamFail" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 volume_db = -10.0
+
+[node name="GuitarGuy" type="AnimatedSprite" parent="."]
+position = Vector2( 113.144, 173.725 )
+frames = SubResource( 13 )
+frame = 7
+playing = true
+
+[node name="Campfire" type="AnimatedSprite" parent="."]
+position = Vector2( 137.116, 178.721 )
+frames = SubResource( 18 )
+frame = 2
+playing = true

@@ -9,8 +9,8 @@ var showTimeBeat:int = 3;
 var restart_next_tick = true;
 var stop = true;
 
-func getFrequenz():
-	return 60000/bpm
+func getFrequenz()->float:
+	return 60000.0/float(bpm)
 func getShowTime():
 	return getFrequenz()*showTimeBeat
 
@@ -97,7 +97,7 @@ func _process(delta):
 		if (restart_next_tick):
 			restart_next_tick = false;
 			tick = 0;
-			timeCollapsed = getFrequenz();
+			timeCollapsed = 0;
 			clearAll();
 			get_parent().startCall();
 		if (Input.is_action_just_pressed("A_up") && not arrow_up_pressed):

@@ -93,7 +93,8 @@ func _ready():
 	song_audio_stream.append($AudioStream4)
 	song_audio_stream.append($AudioStream5)
 	song_audio_stream.append($AudioStream6)
-	load_song(0);
+	load_song($Clicker.data["tier"]);
+	load_main_instrument($Clicker.data["buyer"])
 
 func _process(delta):
 	if not last_fail == 0:

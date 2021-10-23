@@ -16,11 +16,10 @@ func _process(delta):
 	else:
 		prestige = false
 	
-	if len(get_parent().data["buyer"]) > 0:
-		if get_parent().data["buyer"][len(get_parent().data["buyer"])-1] >= 10:
-			supremacy = true
-		else:
-			supremacy = false
+	if get_parent().data["buyer"] >= 10:
+		supremacy = true
+	else:
+		supremacy = false
 	update()
 
 func update():

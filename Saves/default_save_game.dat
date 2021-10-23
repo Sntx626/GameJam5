@@ -1,4 +1,6 @@
 {
 	"score": 0,
-	"buyer": []
+	"combo": 0,
+	"buyer": 0,
+	"tier": 0
 }

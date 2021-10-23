@@ -23,31 +23,33 @@ var data = null
 
 func _ready():
 	load_data()
-	add_to_currency(0)
+	update_combo(data["combo"], false)
 
-var sleep = 0
 func _process(delta):
-	sleep += delta
-	if sleep > 1:
-		for i in range(len(data["buyer"])):
-			if data["buyer"][i]:
-				add_to_currency((i+1)*data["buyer"][i])
-		sleep = 0
+	if data["combo"] > 0:
+		add_to_currency((data["tier"]+1)*data["buyer"]*data["combo"]*delta)
+	else:
+		add_to_currency((data["tier"]+1)*data["buyer"]*delta)
 	buy_upgrades()
 
 func buy_upgrades():
 	if Input.is_action_just_pressed("prestige"):
 		if data["score"] >= 1000:
-			add_to_buyer(len(data["buyer"])-1, 1)
+			add_to_buyer()
 			data["score"] = 0
+			get_parent().add_instrument()
 	if Input.is_action_just_pressed("supremacy"):
-		if data["buyer"][len(data["buyer"])-1] >= 10:
-			add_to_buyer(len(data["score"]["currencies"]), 1)
+		if data["buyer"] >= 10:
+			increase_tier()
+			data["score"] = 0
+			data["buyer"] = 0
+			get_parent().load_main_instrument()
 
 func update_text():
-	$Score/ScoreValue.text = str(data["score"])
+	$Score/ScoreValue.text = str(int(data["score"]))
 
 func update_combo(newValue, canFail):
+	data["combo"] = newValue
 	$Score/ComboLabel.text = str(newValue) + 'x';
 	if (newValue == 0):
 		$Score/ComboLabel.visible = false;
@@ -57,16 +59,16 @@ func update_combo(newValue, canFail):
 		$Score/ComboLabel.visible = true;
 	return newValue
 
-func add_to_currency(amount:int):
+func add_to_currency(amount:float=1):
 	data["score"] += amount
 	update_text()
 
-func add_to_buyer(tier:int, amount:int):
-	if tier < len(data["buyer"])-1:
-		data["buyer"][tier] += amount
-	else:
-		data["buyer"].append(0)
-		add_to_buyer(tier, amount)
+func add_to_buyer(amount:float=1):
+	data["buyer"] += amount
+	update_text()
+
+func increase_tier(amount:int=1):
+	data["tier"] += amount
 	update_text()
 
 func _del_save_game():

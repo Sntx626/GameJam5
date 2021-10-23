@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/MainScene.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/klicker.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/RythmGame.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Clicker.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/stageExample.png" type="Texture" id=4]
 [ext_resource path="res://Sounds/GameJamLofi1_52BPM.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Bass.wav" type="AudioStream" id=6]
@@ -22,8 +22,7 @@ texture = ExtResource( 4 )
 
 [node name="RythmGame" parent="." instance=ExtResource( 2 )]
 
-[node name="Klicker" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0.561249, 0 )
+[node name="Clicker" parent="." instance=ExtResource( 3 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

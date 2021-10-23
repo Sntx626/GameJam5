@@ -23,7 +23,6 @@ var arrow_left_pressed = false;
 var template = load("res://Scenes/TemplateGhostArrow.tscn");
 var template_particle = load("res://Scenes/ArrowParticel.tscn");
 func _ready():
-	updateCombo(0, false);
 	pass
 var points = 0;
 
@@ -31,16 +30,6 @@ var timeCollapsed = 0;
 var tick = 0;
 
 var combo = 0;
-
-func updateCombo(newValue, canFail):
-	combo = newValue
-	$UI/ComboLabel.text = str(newValue) + 'x';
-	if (newValue == 0):
-		$UI/ComboLabel.visible = false;
-		if canFail:
-			get_parent().failNode();
-	else:
-		$UI/ComboLabel.visible = true;
 
 func addArrow(parent, list):
 		var instance = template.instance();
@@ -58,15 +47,15 @@ func pressedRowEvent(row):
 	if (row.size() > 0):
 		var points = row[0].getStagePoints();
 		if (not points == -1):
-			get_parent().klicker.add_to_currency(0,points)
+			get_parent().clicker.add_to_currency(0,points)
 			if (points > 0):
 				get_parent().hitNode();
 				var part = template_particle.instance();
 				add_child(part)
 			if (points == row[0].get("stages_points")[0]):
-				updateCombo(combo + 1, true)
+				combo = get_parent().clicker.update_combo(combo + 1, true)
 			elif (points == 0):
-				updateCombo(0, true)
+				combo = get_parent().clicker.update_combo(0, true)
 			#get_parent().get_child(2).add_to_currency(0,row[0].getStagePoints())
 			remove_child(row[0]);
 			row.remove(0);
@@ -74,7 +63,7 @@ func pressedRowEvent(row):
 func clearRowFromStopped(row):
 	while (row.size() > 0 && row[0].get("stopped") == true):
 		remove_child(row[0])
-		updateCombo(0, true)
+		combo = get_parent().clicker.update_combo(0, true)
 		row.remove(0)
 
 func setArrowColor(arrow, r, g, b):

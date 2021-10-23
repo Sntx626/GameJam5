@@ -97,7 +97,7 @@ func _process(delta):
 		if (restart_next_tick):
 			restart_next_tick = false;
 			tick = 0;
-			timeCollapsed = 0;
+			timeCollapsed = getFrequenz();
 			clearAll();
 			get_parent().startCall();
 		if (Input.is_action_just_pressed("A_up") && not arrow_up_pressed):
@@ -122,7 +122,7 @@ func _process(delta):
 		if (Input.is_action_just_released("A_right") && arrow_right_pressed):
 			setArrowColor($ArrowRight, 255, 255, 255);
 			arrow_right_pressed = false;
-		while (timeCollapsed > getFrequenz()):
+		while (timeCollapsed >= getFrequenz()):
 			tick += 1;
 			timeCollapsed -= getFrequenz();
 			if (templateUp[(tick+showTimeBeat)%templateUp.length()] == '.'):

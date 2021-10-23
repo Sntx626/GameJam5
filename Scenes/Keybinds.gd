@@ -15,8 +15,8 @@ func _process(delta):
 		prestige = true
 	else:
 		prestige = false
-	
-	if get_parent().data["buyer"]+1 > len(get_parent().get_parent().current_song["beatmaps"]):
+	print(len(get_parent().get_parent().current_song["beatmaps"]))
+	if get_parent().data["buyer"] >= len(get_parent().get_parent().current_song["beatmaps"])-1:
 		supremacy = true
 	else:
 		supremacy = false

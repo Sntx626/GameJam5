@@ -52,7 +52,7 @@ __meta__ = {
 }
 
 [node name="Keybinds" type="Node2D" parent="."]
-position = Vector2( 0, 208 )
+position = Vector2( 7, 201 )
 script = ExtResource( 3 )
 
 [node name="KeybindsButtons" type="Label" parent="Keybinds"]

@@ -31,12 +31,28 @@ func _process(delta):
 	if sleep > 1:
 		for i in range(len(data["score"]["buyer"])):
 			if data["score"]["buyer"][i] > 0:
-				add_to_currency(i, data["score"]["buyer"][i])
+				add_to_currency(i, (i+1)*data["score"]["buyer"][i])
 		sleep = 0
+	buy_upgrades()
+
+func buy_upgrades():
+	if Input.is_action_just_pressed("prestige") and len(data["score"]["currencies"]) > 0:
+		if data["score"]["currencies"][len(data["score"]["currencies"])-1] >= 1000:
+			add_to_buyer(len(data["score"]["currencies"])-1, 1)
+			data["score"]["currencies"][len(data["score"]["currencies"])-1] = 0
+	if Input.is_action_just_pressed("supremacy") and len(data["score"]["buyer"]) > 0:
+		if data["score"]["buyer"][len(data["score"]["buyer"])-1] >= 10:
+			add_to_buyer(len(data["score"]["currencies"]), 1)
+
+func sum(arr:Array):
+	var val = 0
+	for v in arr:
+		val += v
+	return val
 
 func update_text():
 	if len(data["score"]["currencies"]) > 0:
-		$Score/ScoreValue.text = str(data["score"]["currencies"][0])
+		$Score/ScoreValue.text = str(sum(data["score"]["currencies"]))
 
 func update_combo(newValue, canFail):
 	$Score/ComboLabel.text = str(newValue) + 'x';

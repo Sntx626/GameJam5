@@ -17,8 +17,8 @@ func _process(delta):
 		else:
 			prestige = false
 	
-	if len(get_parent().data["prestige"]["currencies"]) > 0:
-		if get_parent().data["prestige"]["currencies"][len(get_parent().data["prestige"]["currencies"])-1] >= 1000:
+	if len(get_parent().data["score"]["buyer"]) > 0:
+		if get_parent().data["score"]["buyer"][len(get_parent().data["score"]["buyer"])-1] >= 10:
 			supremacy = true
 		else:
 			supremacy = false

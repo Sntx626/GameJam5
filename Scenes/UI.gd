@@ -17,7 +17,7 @@ var arrow_left_list = [];
 
 var template = load("res://Scenes/TemplateGhostArrow.tscn");
 func _ready():
-	updateCombo(0);
+	updateCombo(0, false);
 	pass
 var points = 0;
 
@@ -26,12 +26,13 @@ var tick = 0;
 
 var combo = 0;
 
-func updateCombo(newValue):
+func updateCombo(newValue, canFail):
 	combo = newValue
 	$UI/ComboLabel.text = str(newValue) + 'x';
 	if (newValue == 0):
 		$UI/ComboLabel.visible = false;
-		get_parent().failNode();
+		if canFail:
+			get_parent().failNode();
 	else:
 		$UI/ComboLabel.visible = true;
 
@@ -55,9 +56,9 @@ func pressedRowEvent(row):
 			if (points > 0):
 				get_parent().hitNode();
 			if (points == row[0].get("stages_points")[0]):
-				updateCombo(combo + 1)
+				updateCombo(combo + 1, true)
 			elif (points == 0):
-				updateCombo(0)
+				updateCombo(0, true)
 			#get_parent().get_child(2).add_to_currency(0,row[0].getStagePoints())
 			remove_child(row[0]);
 			row.remove(0);
@@ -65,7 +66,7 @@ func pressedRowEvent(row):
 func clearRowFromStopped(row):
 	while (row.size() > 0 && row[0].get("stopped") == true):
 		remove_child(row[0])
-		updateCombo(0)
+		updateCombo(0, true)
 		row.remove(0)
 
 

@@ -4,9 +4,11 @@ var bpm = 52;
 var points = 0
 
 var klicker = null
-var audio_stream = null
-
-
+var song_audio_stream = [];
+var main_instrument_audio_stream;
 func _ready():
 	klicker = $Klicker
-	audio_stream = $AudioStreamPlayer
+	song_audio_stream.append($AudioStreamPlayer)
+func hitNode():
+	print("Test")
+	pass;

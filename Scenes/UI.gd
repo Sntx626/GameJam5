@@ -1,10 +1,12 @@
 extends Node2D
-var templateUp =    ". . .   . . .   "
-var templateRight = " .              "
-var templateLeft =  "      .       . "
+var templateUp =    ". . . . . . . . . . . . . . . . "
+var templateRight = "               .                "
+var templateLeft =  "                               ."
 
 var bpm = 208;
 var showTimeBeat = 3;
+
+
 var frequenz = 60000/bpm;
 var showTime = frequenz*showTimeBeat;
 
@@ -29,6 +31,7 @@ func updateCombo(newValue):
 	$UI/ComboLabel.text = str(newValue) + 'x';
 	if (newValue == 0):
 		$UI/ComboLabel.visible = false;
+		get_parent().failNode();
 	else:
 		$UI/ComboLabel.visible = true;
 
@@ -50,9 +53,10 @@ func pressedRowEvent(row):
 		if (not points == -1):
 			get_parent().klicker.add_to_currency(0,points)
 			if (points > 0):
-				updateCombo(combo + 1)
 				get_parent().hitNode();
-			else:
+			if (points == row[0].get("stages_points")[0]):
+				updateCombo(combo + 1)
+			elif (points == 0):
 				updateCombo(0)
 			#get_parent().get_child(2).add_to_currency(0,row[0].getStagePoints())
 			remove_child(row[0]);
@@ -80,14 +84,14 @@ func _process(delta):
 		timeCollapsed -= frequenz;
 		if (templateUp[(tick+showTimeBeat)%templateUp.length()] == '.'):
 			addArrow($UI/ArrowTop, arrow_up_list);
-		if (templateRight[(tick+showTimeBeat)%templateUp.length()] == '.'):
+		if (templateRight[(tick+showTimeBeat)%templateRight.length()] == '.'):
 			addArrow($UI/ArrowRight, arrow_right_list);
-		if (templateLeft[(tick+showTimeBeat)%templateUp.length()] == '.'):
+		if (templateLeft[(tick+showTimeBeat)%templateLeft.length()] == '.'):
 			addArrow($UI/ArrowLeft, arrow_left_list);
 		var song_audio_stream = get_parent().get("song_audio_stream");
-		for audio_stream in song_audio_stream:
-			if (not audio_stream.playing):
-				audio_stream.play(0)
+		#for audio_stream in song_audio_stream:
+		#	if (not audio_stream.playing):
+		#		audio_stream.play(0)
 	clearRowFromStopped(arrow_up_list)
 	clearRowFromStopped(arrow_left_list)
 	clearRowFromStopped(arrow_right_list)

@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/klicker.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/stageExample.png" type="Texture" id=4]
 [ext_resource path="res://Sounds/GameJamLofi1_52BPM.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Bass.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Lead.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 HiHats.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Kick+Snare.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Rhodes.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Regen.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sounds/FailSound.wav" type="AudioStream" id=12]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,4 +27,38 @@ position = Vector2( 0.561249, 0 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="AudioStreamRhodes" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStreamRegen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStreamKick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStreamLead" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStreamHiHats" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -80.0
+autoplay = true
+
+[node name="AudioStreamBass" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStreamFail" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
 volume_db = -10.0

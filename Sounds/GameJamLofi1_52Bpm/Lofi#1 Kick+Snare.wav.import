@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Lofi#1 Kick+Snare.wav-97fb3d245a2782b13c43dca0e92d98b0.sample"
+
+[deps]
+
+source_file="res://Sounds/GameJamLofi1_52Bpm/Lofi#1 Kick+Snare.wav"
+dest_files=[ "res://.import/Lofi#1 Kick+Snare.wav-97fb3d245a2782b13c43dca0e92d98b0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

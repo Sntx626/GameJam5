@@ -6,7 +6,7 @@ var time = 2000;
 var timeTraveld = 0;
 var stopped = false;
 
-var min_destroy = 0.4;
+var min_destroy = 0.5;
 var stages_offset = [0.05, 0.15, 0.3]
 var stages_color = [[0, 171, 83], [245, 245, 66], [171, 0, 14]]
 var stages_points = [3, 2, 1]

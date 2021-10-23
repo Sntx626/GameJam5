@@ -4,5 +4,4 @@
 font_path = "res://Fonts/Fira_Code_v5.2/ttf/FiraCode-Medium.ttf"
 
 [resource]
-size = 8
 font_data = SubResource( 3 )

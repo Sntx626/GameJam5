@@ -59,9 +59,15 @@ func update_combo(newValue, canFail):
 		$Score/ComboLabel.visible = true;
 	return newValue
 
+var clickt = []
+var time_last = OS.get_ticks_usec()
 func add_to_currency(amount:float=1):
 	data["score"] += amount
 	update_text()
+	if amount > 0:
+		var temp = OS.get_ticks_usec()
+		clickt.append([amount, temp-time_last])
+		time_last = temp
 
 func add_to_buyer(amount:float=1):
 	data["buyer"] += amount
@@ -86,3 +92,7 @@ func _del_save_game():
 	dir.remove("res://Saves/save_game.dat")
 	
 	update_text()
+	
+	file.open("res://Saves/clicks.dat", File.WRITE)
+	file.store_string(JSON.print(clickt))
+	file.close()

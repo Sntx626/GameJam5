@@ -6,4 +6,3 @@ func _ready():
 
 func _process(delta):
 	frame = get_parent().clicker.data["buyer"]
-	

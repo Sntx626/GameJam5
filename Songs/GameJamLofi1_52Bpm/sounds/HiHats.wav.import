@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Kick.wav-1c9c0aa80c408572282d038c42e06cd3.sample"
+path="res://.import/HiHats.wav-375bc981cf155b52f4cef38c6206625f.sample"
 
 [deps]
 
-source_file="res://Sounds/GameJamLofi1_52Bpm/Kick.wav"
-dest_files=[ "res://.import/Kick.wav-1c9c0aa80c408572282d038c42e06cd3.sample" ]
+source_file="res://Songs/GameJamLofi1_52Bpm/sounds/HiHats.wav"
+dest_files=[ "res://.import/HiHats.wav-375bc981cf155b52f4cef38c6206625f.sample" ]
 
 [params]
 

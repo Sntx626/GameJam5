@@ -4,7 +4,7 @@ var templateRight = "               .                "
 var templateLeft =  "                               ."
 
 var bpm:int = 208;
-var showTimeBeat = 3;
+var showTimeBeat:int = 3;
 
 var restart_next_tick = true;
 var stop = true;

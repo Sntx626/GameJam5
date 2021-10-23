@@ -10,131 +10,68 @@ var time_beetween_failure = 1 * 1000;
 var last_fail = 0;
 var play = false;
 
-var index_main_instrument = 0;
-var song_index = 0;
-var song_instruments = [[
-	preload("res://Sounds/GameJamLofi1_52Bpm/HiHats.wav"),
-	preload("res://Sounds/GameJamLofi1_52Bpm/Kick.wav"),
-	preload("res://Sounds/GameJamLofi1_52Bpm/Bass.wav"),
-	preload("res://Sounds/GameJamLofi1_52Bpm/Lead.wav"),
-	preload("res://Sounds/GameJamLofi1_52Bpm/Regen.wav"),
-	preload("res://Sounds/GameJamLofi1_52Bpm/Rhodes.wav")
-],
-[
-	preload("res://Sounds/Song2/Drums.wav"),
-	preload("res://Sounds/Song2/Bass.wav"),
-	preload("res://Sounds/Song2/Lead.wav"),
-	preload("res://Sounds/Song2/Pluck.wav"),
-	preload("res://Sounds/Song2/Ambience.wav")
-]]
-var song_beatmaps = [[
-	[
-		". . . . . . . . . . . . . . . . ",
-		"               .                ",
-		"                               .",
-		3
-	],
-	[
-		".     ",
-		"  .   ",
-		"    . ",
-		3
-	],
-	[
-		" ",
-		" ",
-		" ",
-		3
-	],
-	[
-		" ",
-		" ",
-		" ",
-		3
-	],
-	[
-		" ",
-		" ",
-		" ",
-		3
-	],
-	[
-		" ",
-		" ",
-		" ",
-		3
-	]
-],[
-	[
-		". . . ..",
-		" ",
-		" ",
-		3
-	],
-	[
-		".     ",
-		"  .   ",
-		"    . ",
-		3
-	],
-	[
-		" ",
-		" ",
-		" ",
-		3
-	],
-	[
-		" ",
-		" ",
-		" ",
-		3
-	],
-	[
-		" ",
-		" ",
-		" ",
-		3
-	]
-]
-]
-var song_bpm = [
-	208,
-	150
-]
+func list_files_in_dir(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+	dir.list_dir_end()
+	return files
+
+var current_song = null
+var current_beatmap = 0
+func get_song(index:int) -> Dictionary:
+	var song = null
+	
+	var file = File.new()
+	for d in list_files_in_dir("res://Songs"):
+		print(d)
+		if file.file_exists("res://Songs/"+d+"/data.json"):
+			file.open("res://Songs/"+d+"/data.json", File.READ)
+			var p = JSON.parse(file.get_as_text())
+			if typeof(p.result) == TYPE_DICTIONARY:
+				if p.result["metadata"]["song_index"] == index:
+					song = p.result
+					$RythmGame.set_stop(true);
+					for stream in song_audio_stream:
+						stream.volume_db = -80;
+					for i in range(len(song["beatmaps"])):
+						song_audio_stream[i].stream = load("res://Songs/"+d+"/sounds/"+song["beatmaps"][i]["instrument"])
+					$RythmGame.set("bpm", song["metadata"]["song_bpm"])
+					$RythmGame.set_stop(false);
+					$RythmGame.restart_song();
+					break
+			else:
+				push_error("Unexpected results.")
+			file.close()
+	return song
 
 func add_instrument():
-	load_main_instrument(index_main_instrument+1)
-		
-func load_main_instrument(i):
-	index_main_instrument = i;
-	for j in range(index_main_instrument):
+	load_main_instrument(current_beatmap+1)
+
+func load_main_instrument(i:int=0):
+	current_beatmap = i;
+	for j in range(current_beatmap):
 		song_audio_stream[j].volume_db = -10;
-	for j in range(index_main_instrument, song_audio_stream.size()):
+	for j in range(current_beatmap, song_audio_stream.size()):
 		song_audio_stream[j].volume_db = -80;
-	$RythmGame.set("templateUp", song_beatmaps[song_index][index_main_instrument][0])
-	$RythmGame.set("templateRight", song_beatmaps[song_index][index_main_instrument][1])
-	$RythmGame.set("templateLeft", song_beatmaps[song_index][index_main_instrument][2])
-	$RythmGame.set("showTimeBeat", song_beatmaps[song_index][index_main_instrument][3])
-	
-func load_song(i):
-	$RythmGame.set_stop(true);
-	song_index = i;
-	for stream in song_audio_stream:
-		stream.volume_db = -80;
-	for j in range(song_instruments[i].size()):
-		song_audio_stream[j].stream = song_instruments[i][j];
-	load_main_instrument(index_main_instrument)
-	$RythmGame.set("bpm", song_bpm[i])
-	$RythmGame.set_stop(false);
-	$RythmGame.restart_song();
+	$RythmGame.set("templateUp", current_song["beatmaps"][current_beatmap]["center"])
+	$RythmGame.set("templateRight", current_song["beatmaps"][current_beatmap]["right"])
+	$RythmGame.set("templateLeft", current_song["beatmaps"][current_beatmap]["left"])
+	$RythmGame.set("showTimeBeat", current_song["beatmaps"][current_beatmap]["beats_to_play"])
 
 func tryReset():
 	pass;
 
 func startCall():
-	for j in range(song_instruments[song_index].size()):
+	for j in range(len(current_song["beatmaps"])):
 		song_audio_stream[j].play(0);
-	pass;
 
 func _ready():
 	clicker = $Clicker
@@ -144,7 +81,7 @@ func _ready():
 	song_audio_stream.append($AudioStream4)
 	song_audio_stream.append($AudioStream5)
 	song_audio_stream.append($AudioStream6)
-	load_song($Clicker.data["tier"]);
+	current_song = get_song(int($Clicker.data["tier"])%len(list_files_in_dir("res://Songs")));
 	load_main_instrument($Clicker.data["buyer"])
 
 func _process(delta):
@@ -160,12 +97,12 @@ func failNode():
 		last_fail = time_beetween_failure;
 	if (play):
 		play = false;
-		song_audio_stream[index_main_instrument].volume_db = -80;
+		song_audio_stream[0].volume_db = -80;
 
 func hitNode():
 	if (not play):
 		play = true;
-		song_audio_stream[index_main_instrument].volume_db = -10;
+		song_audio_stream[current_beatmap].volume_db = -10;
 	pass;
 
 func _notification(event):

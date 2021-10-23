@@ -33,17 +33,17 @@ func _process(delta):
 	buy_upgrades()
 
 func buy_upgrades():
-	if Input.is_action_just_pressed("prestige"):
-		if data["score"] >= 1000:
-			add_to_buyer()
-			data["score"] = 0
-			get_parent().add_instrument()
-	if Input.is_action_just_pressed("supremacy"):
-		if data["buyer"] >= 10:
+	if data["buyer"] >= 4:
+		if Input.is_action_pressed("supremacy"):
 			increase_tier()
 			data["score"] = 0
 			data["buyer"] = 0
 			get_parent().load_main_instrument()
+	elif data["score"] >= 1000:
+		if Input.is_action_pressed("prestige"):
+			add_to_buyer()
+			data["score"] = 0
+			get_parent().add_instrument()
 
 func update_text():
 	$Score/ScoreValue.text = str(int(data["score"]))

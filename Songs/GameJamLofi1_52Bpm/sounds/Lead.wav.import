@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Drums.wav-7f50983fe8b753156cf7137bba5d83a7.sample"
+path="res://.import/Lead.wav-d08f22de39e0a870b796a1b15377392c.sample"
 
 [deps]
 
-source_file="res://Sounds/Song2/Drums.wav"
-dest_files=[ "res://.import/Drums.wav-7f50983fe8b753156cf7137bba5d83a7.sample" ]
+source_file="res://Songs/GameJamLofi1_52Bpm/sounds/Lead.wav"
+dest_files=[ "res://.import/Lead.wav-d08f22de39e0a870b796a1b15377392c.sample" ]
 
 [params]
 

@@ -36,7 +36,7 @@ func calculate_target_points(buyer, tier):
 	return (100*(buyer+1))*(tier+1)
 
 func buy_upgrades():
-	if data["buyer"] >= 4:
+	if data["buyer"] >= 4 and data["score"] >= calculate_target_points(data["buyer"], data["tier"]):
 		if Input.is_action_pressed("supremacy"):
 			increase_tier()
 			data["score"] = 0

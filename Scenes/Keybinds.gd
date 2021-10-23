@@ -1,6 +1,6 @@
 extends Node2D
 
-const default_button_text = "a, left\nw, up\nd, right"
+const default_button_text = "s, left\nd, up\nf, right"
 const default_key_text = "Keybinds:\nLeft Arrow:\nCenter Arrow:\nRight Arrow:"
 
 var prestige = false
@@ -15,8 +15,7 @@ func _process(delta):
 		prestige = true
 	else:
 		prestige = false
-	print(len(get_parent().get_parent().current_song["beatmaps"]))
-	if get_parent().data["buyer"] >= len(get_parent().get_parent().current_song["beatmaps"])-1:
+	if get_parent().data["buyer"] >= len(get_parent().get_parent().current_song["beatmaps"])-1 and get_parent().data["score"] >= get_parent().calculate_target_points(get_parent().data["buyer"], get_parent().data["tier"]):
 		supremacy = true
 	else:
 		supremacy = false
@@ -27,11 +26,11 @@ func update():
 	var key_text = default_key_text
 	
 	if supremacy:
-		button_text += "\no"
-		key_text += "\nSupremacy:"
+		button_text += "\nk"
+		key_text += "\nNextSong:"
 	elif prestige:
-		button_text += "\np"
-		key_text += "\nPrestige:"
+		button_text += "\nj"
+		key_text += "\nNextInstrument:"
 	
 	$KeybindsButtons.text = button_text
 	$KeybindsKeys.text = key_text

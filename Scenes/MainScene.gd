@@ -11,6 +11,7 @@ var time_beetween_failure = 1 * 1000;
 var last_fail = 0;
 var play = false;
 
+
 func _ready():
 	klicker = $Klicker
 	song_audio_stream.append($AudioStreamBass)

@@ -8,46 +8,39 @@
     "beatmaps": [
         {
             "instrument": "HiHats.wav",
-            "left":   "  ",
-            "center": ". ",
-            "right":  " ",
+            "left":   ".                               ",
+            "center": " . . . . . . . . . . . . . . . .",
+            "right":  "                .               ",
             "beats_to_play": 3
         },
         {
             "instrument": "Kick.wav",
-            "left":   ".     ",
-            "center": "  .   ",
-            "right":  "    . ",
+            "left":   " .     .   .     .     .   .    ",
+            "center": "   .     .     .   .     .     .",
+            "right":  ".    .       .  .    .       .  ",
             "beats_to_play": 3
         },
         {
             "instrument": "Bass.wav",
-            "left":   " ",
-            "center": " ",
-            "right":  " ",
+            "left":   " .                     .         .               .              ",
+            "center": "                                                       .        ",
+            "right":  "       .         .                     .       .                ",
             "beats_to_play": 3
         },
         {
             "instrument": "Lead.wav",
-            "left":   " ",
-            "center": " ",
-            "right":  " ",
-            "beats_to_play": 3
-        },
-        {
-            "instrument": "Regen.wav",
-            "left":   " ",
-            "center": " ",
-            "right":  " ",
+            "left":   "                 .         .     .                         .   .                                       .       .             .  ",
+            "center": "             .               .                                                   .           .                                  ",
+            "right":  "           .                           .                     .   .                         .     .               .         .    ",
             "beats_to_play": 3
         },
         {
             "instrument": "Rhodes.wav",
-            "left":   " ",
-            "center": " ",
-            "right":  " ",
+            "left":   " .                   .           .                   .           .                   .           .                   .          ",
+            "center": "                                                                                                                             .  ",
+            "right":  "     .           .                   .           .                   .           .                   .           .              ",
             "beats_to_play": 3
         }
     ],
-    "ambienct_sounds": ""
+    "ambienct_sounds": "Regen.wav"
 }

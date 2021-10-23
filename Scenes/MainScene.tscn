@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/RythmGame.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Clicker.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/stageExample.png" type="Texture" id=4]
+[ext_resource path="res://Assets/backgrounds/background1.png" type="Texture" id=4]
 [ext_resource path="res://Sounds/FailSound.wav" type="AudioStream" id=12]
 
 [node name="MainScene" type="Node2D"]

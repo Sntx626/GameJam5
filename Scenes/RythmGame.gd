@@ -3,15 +3,16 @@ var templateUp =    ". . . . . . . . . . . . . . . . "
 var templateRight = "               .                "
 var templateLeft =  "                               ."
 
-var bpm = 208;
+var bpm:int = 208;
 var showTimeBeat = 3;
 
 var restart_next_tick = true;
 var stop = true;
 
-var frequenz = 60000/bpm;
-var showTime = frequenz*showTimeBeat;
-
+func getFrequenz():
+	return 60000/bpm
+func getShowTime():
+	return getFrequenz()*showTimeBeat
 
 var arrow_up_list = [];
 var arrow_right_list = [];
@@ -45,7 +46,7 @@ func addArrow(parent, list):
 		instance.position = parent.position;
 		instance.scale = parent.scale;
 		instance.rotation_degrees = parent.rotation_degrees;
-		instance.set("time", showTime)
+		instance.set("time", getShowTime())
 		instance.set("start_pos", Vector2(endPos.x, endPos.y - 248))
 		instance.set("end_pos", Vector2(endPos.x, endPos.y))
 		list.append(instance);
@@ -121,9 +122,9 @@ func _process(delta):
 		if (Input.is_action_just_released("A_right") && arrow_right_pressed):
 			setArrowColor($ArrowRight, 255, 255, 255);
 			arrow_right_pressed = false;
-		while (timeCollapsed > frequenz):
+		while (timeCollapsed > getFrequenz()):
 			tick += 1;
-			timeCollapsed -= frequenz;
+			timeCollapsed -= getFrequenz();
 			if (templateUp[(tick+showTimeBeat)%templateUp.length()] == '.'):
 				addArrow($ArrowTop, arrow_up_list);
 			if (templateRight[(tick+showTimeBeat)%templateRight.length()] == '.'):

@@ -19,39 +19,88 @@ var song_instruments = [[
 	preload("res://Sounds/GameJamLofi1_52Bpm/Lead.wav"),
 	preload("res://Sounds/GameJamLofi1_52Bpm/Regen.wav"),
 	preload("res://Sounds/GameJamLofi1_52Bpm/Rhodes.wav")
+],
+[
+	preload("res://Sounds/Song2/Drums.wav"),
+	preload("res://Sounds/Song2/Bass.wav"),
+	preload("res://Sounds/Song2/Lead.wav"),
+	preload("res://Sounds/Song2/Pluck.wav"),
+	preload("res://Sounds/Song2/Ambience.wav")
 ]]
 var song_beatmaps = [[
 	[
 		". . . . . . . . . . . . . . . . ",
 		"               .                ",
-		"                               ."
+		"                               .",
+		3
 	],
 	[
 		".     ",
 		"  .   ",
-		"    . "
+		"    . ",
+		3
 	],
 	[
 		" ",
 		" ",
-		" "
+		" ",
+		3
 	],
 	[
 		" ",
 		" ",
-		" "
+		" ",
+		3
 	],
 	[
 		" ",
 		" ",
-		" "
+		" ",
+		3
 	],
 	[
 		" ",
 		" ",
-		" "
+		" ",
+		3
 	]
-]]
+],[
+	[
+		". . . ..",
+		" ",
+		" ",
+		3
+	],
+	[
+		".     ",
+		"  .   ",
+		"    . ",
+		3
+	],
+	[
+		" ",
+		" ",
+		" ",
+		3
+	],
+	[
+		" ",
+		" ",
+		" ",
+		3
+	],
+	[
+		" ",
+		" ",
+		" ",
+		3
+	]
+]
+]
+var song_bpm = [
+	208,
+	150
+]
 
 func add_instrument():
 	load_main_instrument(index_main_instrument+1)
@@ -65,15 +114,17 @@ func load_main_instrument(i):
 	$RythmGame.set("templateUp", song_beatmaps[song_index][index_main_instrument][0])
 	$RythmGame.set("templateRight", song_beatmaps[song_index][index_main_instrument][1])
 	$RythmGame.set("templateLeft", song_beatmaps[song_index][index_main_instrument][2])
+	$RythmGame.set("showTimeBeat", song_beatmaps[song_index][index_main_instrument][3])
 	
 func load_song(i):
 	$RythmGame.set_stop(true);
-	song_index = 0;
+	song_index = i;
 	for stream in song_audio_stream:
 		stream.volume_db = -80;
 	for j in range(song_instruments[i].size()):
 		song_audio_stream[j].stream = song_instruments[i][j];
 	load_main_instrument(index_main_instrument)
+	$RythmGame.set("bpm", song_bpm[i])
 	$RythmGame.set_stop(false);
 	$RythmGame.restart_song();
 

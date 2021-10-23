@@ -9,8 +9,8 @@ var showTimeBeat:int = 3;
 var restart_next_tick = true;
 var stop = true;
 
-func getFrequenz():
-	return 60000/bpm
+func getFrequenz()->float:
+	return 60000.0/float(bpm)
 func getShowTime():
 	return getFrequenz()*showTimeBeat
 
@@ -122,7 +122,7 @@ func _process(delta):
 		if (Input.is_action_just_released("A_right") && arrow_right_pressed):
 			setArrowColor($ArrowRight, 255, 255, 255);
 			arrow_right_pressed = false;
-		while (timeCollapsed > getFrequenz()):
+		while (timeCollapsed >= getFrequenz()):
 			tick += 1;
 			timeCollapsed -= getFrequenz();
 			if (templateUp[(tick+showTimeBeat)%templateUp.length()] == '.'):

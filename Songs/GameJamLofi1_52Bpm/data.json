@@ -8,9 +8,9 @@
     "beatmaps": [
         {
             "instrument": "HiHats.wav",
-            "left":   ". . . . . . . . . . . . . . . . ",
-            "center": "               .                ",
-            "right":  "                               .",
+            "left":   "  ",
+            "center": ". ",
+            "right":  " ",
             "beats_to_play": 3
         },
         {

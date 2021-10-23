@@ -27,11 +27,24 @@ __meta__ = {
 [node name="ScoreLabel" type="Label" parent="Score"]
 margin_top = 20.0
 margin_right = 256.0
-margin_bottom = 34.0
+margin_bottom = 40.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Score"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ComboLabel" type="Label" parent="Score"]
+margin_left = 185.0
+margin_right = 313.0
+margin_bottom = 20.0
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "1x"
+align = 2
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

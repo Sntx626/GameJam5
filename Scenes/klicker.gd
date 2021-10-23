@@ -38,6 +38,16 @@ func update_text():
 	if len(data["score"]["currencies"]) > 0:
 		$Score/ScoreValue.text = str(data["score"]["currencies"][0])
 
+func update_combo(newValue, canFail):
+	$Score/ComboLabel.text = str(newValue) + 'x';
+	if (newValue == 0):
+		$Score/ComboLabel.visible = false;
+		if canFail:
+			get_parent().failNode();
+	else:
+		$Score/ComboLabel.visible = true;
+	return newValue
+
 func add_to_currency(tier:int, amount:int):
 	if tier < len(data["score"]["currencies"]):
 		data["score"]["currencies"][tier] += amount

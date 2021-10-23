@@ -1,26 +1,4 @@
 {
-	"score": {
-		"currencies": [
-			0
-		],
-		"buyer": [
-
-		]
-	},
-	"prestige": {
-		"currencies": [
-
-		],
-		"buyer": [
-
-		]
-	},
-	"supremacy": {
-		"currencies": [
-
-		],
-		"buyer": [
-
-		]
-	}
+	"score": 0,
+	"buyer": []
 }

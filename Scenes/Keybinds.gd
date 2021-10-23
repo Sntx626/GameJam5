@@ -11,14 +11,13 @@ func _ready():
 
 # ! prestige and supremacy need to be reset
 func _process(delta):
-	if len(get_parent().data["score"]["currencies"]) > 0:
-		if get_parent().data["score"]["currencies"][len(get_parent().data["score"]["currencies"])-1] >= 1000:
-			prestige = true
-		else:
-			prestige = false
+	if get_parent().data["score"] >= 1000:
+		prestige = true
+	else:
+		prestige = false
 	
-	if len(get_parent().data["score"]["buyer"]) > 0:
-		if get_parent().data["score"]["buyer"][len(get_parent().data["score"]["buyer"])-1] >= 10:
+	if len(get_parent().data["buyer"]) > 0:
+		if get_parent().data["buyer"][len(get_parent().data["buyer"])-1] >= 10:
 			supremacy = true
 		else:
 			supremacy = false

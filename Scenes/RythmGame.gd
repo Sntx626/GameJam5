@@ -47,7 +47,7 @@ func pressedRowEvent(row):
 	if (row.size() > 0):
 		var points = row[0].getStagePoints();
 		if (not points == -1):
-			get_parent().clicker.add_to_currency(0,points)
+			get_parent().clicker.add_to_currency(points)
 			if (points > 0):
 				get_parent().hitNode();
 				var part = template_particle.instance();

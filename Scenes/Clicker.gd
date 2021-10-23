@@ -23,36 +23,29 @@ var data = null
 
 func _ready():
 	load_data()
-	add_to_currency(0, 0)
+	add_to_currency(0)
 
 var sleep = 0
 func _process(delta):
 	sleep += delta
 	if sleep > 1:
-		for i in range(len(data["score"]["buyer"])):
-			if data["score"]["buyer"][i] > 0:
-				add_to_currency(i, (i+1)*data["score"]["buyer"][i])
+		for i in range(len(data["buyer"])):
+			if data["buyer"][i]:
+				add_to_currency((i+1)*data["buyer"][i])
 		sleep = 0
 	buy_upgrades()
 
 func buy_upgrades():
-	if Input.is_action_just_pressed("prestige") and len(data["score"]["currencies"]) > 0:
-		if data["score"]["currencies"][len(data["score"]["currencies"])-1] >= 1000:
-			add_to_buyer(len(data["score"]["currencies"])-1, 1)
-			data["score"]["currencies"][len(data["score"]["currencies"])-1] = 0
-	if Input.is_action_just_pressed("supremacy") and len(data["score"]["buyer"]) > 0:
-		if data["score"]["buyer"][len(data["score"]["buyer"])-1] >= 10:
+	if Input.is_action_just_pressed("prestige"):
+		if data["score"] >= 1000:
+			add_to_buyer(len(data["buyer"])-1, 1)
+			data["score"] = 0
+	if Input.is_action_just_pressed("supremacy"):
+		if data["buyer"][len(data["buyer"])-1] >= 10:
 			add_to_buyer(len(data["score"]["currencies"]), 1)
 
-func sum(arr:Array):
-	var val = 0
-	for v in arr:
-		val += v
-	return val
-
 func update_text():
-	if len(data["score"]["currencies"]) > 0:
-		$Score/ScoreValue.text = str(sum(data["score"]["currencies"]))
+	$Score/ScoreValue.text = str(data["score"])
 
 func update_combo(newValue, canFail):
 	$Score/ComboLabel.text = str(newValue) + 'x';
@@ -64,19 +57,15 @@ func update_combo(newValue, canFail):
 		$Score/ComboLabel.visible = true;
 	return newValue
 
-func add_to_currency(tier:int, amount:int):
-	if tier < len(data["score"]["currencies"]):
-		data["score"]["currencies"][tier] += amount
-	else:
-		data["score"]["currencies"].append(0)
-		add_to_currency(tier, amount)
+func add_to_currency(amount:int):
+	data["score"] += amount
 	update_text()
 
 func add_to_buyer(tier:int, amount:int):
-	if tier < len(data["score"]["buyer"]):
-		data["score"]["buyer"][tier] += amount
+	if tier < len(data["buyer"])-1:
+		data["buyer"][tier] += amount
 	else:
-		data["score"]["buyer"].append(0)
+		data["buyer"].append(0)
 		add_to_buyer(tier, amount)
 	update_text()
 

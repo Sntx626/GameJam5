@@ -29,7 +29,6 @@ var current_song = null
 var current_beatmap = 0
 func get_song(index:int) -> Dictionary:
 	var song = null
-	
 	var file = File.new()
 	for d in list_files_in_dir("res://Songs"):
 		print(d)
@@ -98,6 +97,9 @@ func _ready():
 	load_song($Clicker.data["tier"], $Clicker.data["buyer"])
 
 func load_song(song_index, beatmap_index):
+	print(song_index)
+	print(beatmap_index)
+	print(len(list_files_in_dir("res://Songs")))
 	current_song = get_song(int(song_index)%len(list_files_in_dir("res://Songs")));
 	load_main_instrument(beatmap_index)
 

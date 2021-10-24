@@ -36,14 +36,14 @@ func calculate_target_points(buyer, tier):
 	return (100*(buyer+1))*(tier+1)
 
 func buy_upgrades():
-	if data["buyer"] >= 4 and data["score"] >= calculate_target_points(data["buyer"], data["tier"]):
+	if data["buyer"] >= len(get_parent().current_song["beatmaps"])-1 and data["score"] >= calculate_target_points(data["buyer"], data["tier"]):
 		if Input.is_action_pressed("supremacy"):
 			increase_tier()
 			data["score"] = 0
 			data["buyer"] = 0
 			get_parent().load_song(data["tier"], data["buyer"])
 	elif data["score"] >= calculate_target_points(data["buyer"], data["tier"]):
-		if Input.is_action_pressed("prestige"):
+		if Input.is_action_pressed("prestige") and data["buyer"] < len(get_parent().current_song["beatmaps"]):
 			add_to_buyer()
 			data["score"] = 0
 			get_parent().load_main_instrument(data["buyer"])

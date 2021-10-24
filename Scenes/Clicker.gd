@@ -65,8 +65,8 @@ func update_combo(newValue, canFail):
 	$Score/ComboLabel.text = str(newValue) + 'x';
 	if (newValue == 0):
 		#$Score/ComboLabel.visible = false;
-		#if canFail:
-		#	get_parent().failNode();
+		if canFail:
+			get_parent().failNode();
 		pass
 	else:
 		$Score/ComboLabel.visible = true;

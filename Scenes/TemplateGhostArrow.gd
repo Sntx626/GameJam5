@@ -30,23 +30,31 @@ func getStagePoints():
 		return -1;
 	return 0;
 
-func interpolate1D(start, end, x):
-	return start*(1-x) + end*x;
+func anim_get_speed(begin_time, end_time): # end-begin
+	return 1000/(time*(begin_time-end_time))
 
-func interpolate2D(start1, end1, start2, end2, x, y):
-	var s = interpolate1D(start1, end1, x)
-	var t = interpolate1D(start2, end2, x)
-	return interpolate1D(s, t, y)
-
+var is_anim_0_playing = false
+var is_anim_1_playing = false
+var is_anim_2_playing = false
 func setStageColor():
 	var pressTime = abs(1-timeTraveld/time);
 	#if (pressTime  > stages_offset[stages_offset.size()] && pressTime < stages_offset[stages_offset.size()]+offset_time):	
 		
 	for i in range(stages_offset.size()):
 		if (pressTime < stages_offset[i]):
-			set_color(stages_color[i][0], stages_color[i][1], stages_color[i][2])
+			if i == 2 and not is_anim_0_playing:
+				is_anim_0_playing = true
+				$AnimationPlayer.playback_speed = anim_get_speed(stages_offset[2], stages_offset[1])
+				$AnimationPlayer.play("white_to_red")
+			elif i == 1 and not is_anim_1_playing:
+				is_anim_1_playing = true
+				$AnimationPlayer.playback_speed = anim_get_speed(stages_offset[1], stages_offset[0])
+				$AnimationPlayer.play("red_to_purple")
+			elif i == 0 and not is_anim_2_playing:
+				is_anim_2_playing = true
+				$AnimationPlayer.playback_speed = anim_get_speed(stages_offset[0], 0)
+				$AnimationPlayer.play("purple_to_blue")
 			return
-	set_color(255, 255, 255);
 
 func getStageColor():
 	var pressTime = abs(1-timeTraveld/time);
@@ -56,7 +64,6 @@ func getStageColor():
 		if (pressTime < stages_offset[i]):
 			return Vector3(stages_color[i][0], stages_color[i][1], stages_color[i][2])
 	return Vector3(255, 255, 255)
-	
 
 func set_color(r, g, b):
 	modulate.r = r/255.0;
@@ -65,6 +72,7 @@ func set_color(r, g, b):
 	
 
 func _ready():
+	$AnimationPlayer.play("flight")
 	set_color(255, 255, 255)
 	pass # Replace with function body.
 #update
@@ -77,6 +85,6 @@ func _process(delta):
 		dir = dir * procentage;
 		dir += start_pos;
 		position = dir;
-		modulate.a = (0.2 + (procentage*4)/5) if (procentage < 1) else 0;
+		modulate.a = (0.2 + (procentage*4)/5) if (procentage < 1) else 1;
 		if (timeTraveld > time+time*offset_time):
 			stopped = true;

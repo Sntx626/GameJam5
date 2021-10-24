@@ -10,7 +10,7 @@ var min_destroy = 0.5;
 var stages_offset = [0.05, 0.15, 0.3]
 var stages_color = [[0, 171, 83], [245, 245, 66], [171, 0, 14]]
 var stages_points = [3, 2, 1]
-
+var max_scale: Vector2 = Vector2(1, 1)
 var canBePressed = false;
 
 var offset_time = 0.1
@@ -63,6 +63,8 @@ func set_color(r, g, b):
 	modulate.g = g/255.0;
 	modulate.b = b/255.0;
 	
+func bezier_not_really(val:float):
+	return 0.2 * pow(1-val, 3) + 3 * 1.2 * pow(1-val, 2) * val + 3 * 0.9 * (1-val) * pow(val, 2) + pow(val, 3);
 
 func _ready():
 	set_color(255, 255, 255)
@@ -77,6 +79,8 @@ func _process(delta):
 		dir = dir * procentage;
 		dir += start_pos;
 		position = dir;
-		modulate.a = (0.2 + (procentage*4)/5) if (procentage < 1) else 0;
+		modulate.a = bezier_not_really(procentage);
+		scale = max_scale * bezier_not_really(procentage);
+		#scale = (max_scale - max_scale * 0.2) * procentage + max_scale * 0.2;
 		if (timeTraveld > time+time*offset_time):
 			stopped = true;

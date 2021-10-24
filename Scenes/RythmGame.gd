@@ -47,11 +47,12 @@ func addArrow(parent, list):
 		instance.rotation_degrees = parent.rotation_degrees;
 		instance.set("time", getShowTime())
 		instance.set("end_pos", Vector2(endPos.x, endPos.y))
+		instance.set("max_scale", parent.scale)
 		if endPos.x > 260:
 			endPos.x -= 32
 		elif endPos.x < 252:
 			endPos.x += 32
-		instance.set("start_pos", Vector2(endPos.x, endPos.y - 196))
+		instance.set("start_pos", Vector2(endPos.x, endPos.y - 210))
 		list.append(instance);
 		add_child(instance);
 

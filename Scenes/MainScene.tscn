@@ -20,7 +20,7 @@ texture = ExtResource( 4 )
 [node name="Clicker" parent="." instance=ExtResource( 3 )]
 
 [node name="GuiSong" type="Sprite" parent="."]
-position = Vector2( 10.4093, 11.9127 )
+position = Vector2( 7, 7 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 centered = false

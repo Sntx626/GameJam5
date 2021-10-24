@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FailSound.wav-412d520e7b0468f3d7331e527b6d9b48.sample"
+
+[deps]
+
+source_file="res://Songs/GameJamLofi1_52Bpm/sounds/FailSound.wav"
+dest_files=[ "res://.import/FailSound.wav-412d520e7b0468f3d7331e527b6d9b48.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

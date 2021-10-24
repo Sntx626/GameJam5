@@ -1,18 +1,39 @@
 {
     "metadata": {
         "song_index": 4,
-        "name": "Song3",
-        "song_bpm": 904,
+        "name": "Song2",
+        "song_bpm": 300,
         "background_img": "background1"
     },
     "beatmaps": [
         {
-            "instrument": "test.wav",
-            "left":   "                                                            .     .   .     .     .   .                                         ",
-            "center": ".       .       .       .       . . .   .       . . .   .       .       .       .       .       .       .       .       .       ",
-            "right":  "                                                          .   .     .     .   .     .                                           ",
-            "beats_to_play": 12
+            "instrument": "Pluck.wav",
+            "left": " .               .       .      ",
+            "center": "         .       .       .      ",
+            "right": " .       .               .      ",
+            "beats_to_play": 6
+        },
+        {
+            "instrument": "Bass.wav",
+            "left": "             .                               . .                ",
+            "center": " .                           .                .  .              ",
+            "right": "                 .               .               .           .  ",
+            "beats_to_play": 6
+        },
+        {
+            "instrument": "Lead.wav",
+            "left": "                 .                       .   . .       .                   .   .                                 .     .   .   .",
+            "center": " .         .   .             . .       .      .      .       .   .           .               . .     . .         .       .      ",
+            "right": "             .                   .                                               .                   . .   .     .           .  ",
+            "beats_to_play": 6
+        },
+        {
+            "instrument": "Drums.wav",
+            "left": "     .  .  . .   . . .  .  . . .",
+            "center": "   .                   . .      ",
+            "right": " .  .  .  .    .                ",
+            "beats_to_play": 6
         }
     ],
-    "ambienct_sounds": ""
+    "ambienct_sounds": "Ambience.wav"
 }

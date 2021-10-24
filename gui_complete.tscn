@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/songs_gui/song1/gui_complete.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Sprite
+
+
+func _ready():
+	pass
+
+func _process(delta):
+	if Input.is_action_pressed(\"prestige\"):
+		$AnimationPlayer.playback_speed = 0.1
+		$AnimationPlayer.play(\"blink#\")
+"
+
+[sub_resource type="Animation" id=1]
+resource_name = "blink#"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 4, 0 ]
+}
+
+[node name="gui_complete" type="Sprite"]
+texture = ExtResource( 1 )
+hframes = 5
+script = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.5
+anims/blink# = SubResource( 1 )

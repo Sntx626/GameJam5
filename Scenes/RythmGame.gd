@@ -22,7 +22,7 @@ var arrow_up_pressed = false;
 var arrow_right_pressed = false;
 var arrow_left_pressed = false;
 
-var template = load("res://Scenes/TemplateGhostArrow.tscn");
+var template = load("res://Assets/arrow/ghost_arrow.tscn");
 var template_particle = load("res://Scenes/ArrowParticel.tscn");
 func _ready():
 	pass
@@ -49,10 +49,10 @@ func addArrow(parent, list):
 		instance.set("end_pos", Vector2(endPos.x, endPos.y))
 		instance.set("max_scale", parent.scale)
 		if endPos.x > 260:
-			endPos.x -= 32
+			endPos.x -= 24
 		elif endPos.x < 252:
-			endPos.x += 32
-		instance.set("start_pos", Vector2(endPos.x, endPos.y - 210))
+			endPos.x += 24
+		instance.set("start_pos", Vector2(endPos.x, endPos.y - 196))
 		list.append(instance);
 		add_child(instance);
 

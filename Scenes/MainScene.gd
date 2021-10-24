@@ -44,6 +44,9 @@ func get_song(index:int) -> Dictionary:
 					for i in range(len(song["beatmaps"])):
 						song_audio_stream[i].stream = load("res://Songs/"+d+"/sounds/"+song["beatmaps"][i]["instrument"])
 						print("loaded:", song["beatmaps"][i]["instrument"])
+					var gui_img = load("res://Songs/" + d + "/gui_complete.PNG");
+					$GuiSong.texture = gui_img
+					$GuiSong.hframes = song["beatmaps"].size()
 					$RythmGame.set("bpm", song["metadata"]["song_bpm"])
 					$RythmGame.set_stop(false);
 					$RythmGame.restart_song();

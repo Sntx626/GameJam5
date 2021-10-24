@@ -9,6 +9,7 @@ var main_instrument_playtime = 2*1000;
 var time_beetween_failure = 1 * 1000;
 var last_fail = 0;
 var play = false;
+var ambient_player;
 
 func list_files_in_dir(path):
 	var files = []
@@ -44,6 +45,14 @@ func get_song(index:int) -> Dictionary:
 					for i in range(len(song["beatmaps"])):
 						song_audio_stream[i].stream = load("res://Songs/"+d+"/sounds/"+song["beatmaps"][i]["instrument"])
 						print("loaded:", song["beatmaps"][i]["instrument"])
+					var gui_img = load("res://Songs/" + d + "/gui_complete.PNG");
+					$GuiSong.texture = gui_img
+					$GuiSong.hframes = song["beatmaps"].size()
+					if (not song["ambienct_sounds"] == ""):
+						$AudioStreamAmbient.stream = load("res://Songs/"+d+"/sounds/"+song["ambienct_sounds"])
+						$AudioStreamAmbient.volume_db = 0
+					else:
+						$AudioStreamAmbient.volume_db = -80
 					$RythmGame.set("bpm", song["metadata"]["song_bpm"])
 					$RythmGame.set_stop(false);
 					$RythmGame.restart_song();
@@ -73,6 +82,7 @@ func tryReset():
 	pass;
 
 func startCall():
+	$AudioStreamAmbient.play(0);
 	for j in range(len(current_song["beatmaps"])):
 		song_audio_stream[j].play(0);
 
@@ -84,6 +94,7 @@ func _ready():
 	song_audio_stream.append($AudioStream4)
 	song_audio_stream.append($AudioStream5)
 	song_audio_stream.append($AudioStream6)
+	ambient_player = $AudioStreamAmbient
 	load_song($Clicker.data["tier"], $Clicker.data["buyer"])
 
 func load_song(song_index, beatmap_index):
@@ -96,6 +107,16 @@ func _process(delta):
 		last_fail -= timeCollapsed;
 		if (last_fail <= 0):
 			last_fail = 0;
+		
+	#animation for guitar guy
+	if $Clicker.data["buyer"] == 0 and $Clicker.data["tier"] == 0 and not $guitarPlayer.playing:
+		$guitarPlayer.play("playing");
+	
+	if $Clicker.data["buyer"] == 1 and $Clicker.data["tier"] == 0 and not $guitarPlayer.toCampfire:
+		$guitarPlayer.goToCampfire();
+	
+	if $Clicker.data["buyer"] == 3 and $Clicker.data["tier"] == 0 and not $campfire.playing:
+		$campfire.play("goingOn");
 
 func failNode():
 	if (last_fail == 0):
@@ -114,3 +135,8 @@ func hitNode():
 func _notification(event):
 	if event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST or event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		$Clicker.save_data()
+
+
+func _on_campfire_animation_finished():
+	if $campfire.animation == "goingOn" :
+		$campfire.play("burning");

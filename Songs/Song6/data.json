@@ -1,0 +1,18 @@
+{
+    "metadata": {
+        "song_index": 5,
+        "name": "Song3",
+        "song_bpm": 904,
+        "background_img": "background1"
+    },
+    "beatmaps": [
+        {
+            "instrument": "test.wav",
+            "left": "                                                            .     .   .     .     .   .                                         ",
+            "center": ".       .       .       .       . . .   .       . . .   .       .       .       .       .       .       .       .       .       ",
+            "right": "                                                          .   .     .     .   .     .                                           ",
+            "beats_to_play": 12
+        }
+    ],
+    "ambienct_sounds": ""
+}

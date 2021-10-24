@@ -1,0 +1,39 @@
+{
+    "metadata": {
+        "song_index": 4,
+        "name": "Song2",
+        "song_bpm": 300,
+        "background_img": "background1"
+    },
+    "beatmaps": [
+        {
+            "instrument": "Pluck.wav",
+            "left": " .               .       .      ",
+            "center": "         .       .       .      ",
+            "right": " .       .               .      ",
+            "beats_to_play": 6
+        },
+        {
+            "instrument": "Bass.wav",
+            "left": "             .                               . .                ",
+            "center": " .                           .                .  .              ",
+            "right": "                 .               .               .           .  ",
+            "beats_to_play": 6
+        },
+        {
+            "instrument": "Lead.wav",
+            "left": "                 .                       .   . .       .                   .   .                                 .     .   .   .",
+            "center": " .         .   .             . .       .      .      .       .   .           .               . .     . .         .       .      ",
+            "right": "             .                   .                                               .                   . .   .     .           .  ",
+            "beats_to_play": 6
+        },
+        {
+            "instrument": "Drums.wav",
+            "left": "     .  .  . .   . . .  .  . . .",
+            "center": "   .                   . .      ",
+            "right": " .  .  .  .    .                ",
+            "beats_to_play": 6
+        }
+    ],
+    "ambienct_sounds": "Ambience.wav"
+}

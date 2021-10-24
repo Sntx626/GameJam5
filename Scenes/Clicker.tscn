@@ -1,0 +1,129 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Clicker.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/fira_code_medium.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scenes/Keybinds.gd" type="Script" id=3]
+
+[node name="Clicker" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Score" type="Node2D" parent="."]
+position = Vector2( 192, 7 )
+
+[node name="ScoreValue" type="Label" parent="Score"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = 7.0
+margin_right = 128.0
+margin_bottom = 27.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="Score"]
+margin_top = 27.0
+margin_right = 256.0
+margin_bottom = 47.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Score"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ComboLabel" type="Label" parent="Score"]
+margin_left = 185.0
+margin_right = 313.0
+margin_bottom = 20.0
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "1x"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AverageScoreGain" type="Label" parent="Score/ComboLabel"]
+margin_left = 64.0
+margin_top = 20.1984
+margin_right = 192.0
+margin_bottom = 40.1984
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "+1.2/s"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreTarget" type="Label" parent="Score"]
+margin_left = 38.4
+margin_right = 166.4
+margin_bottom = 20.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Target: 100"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keybinds" type="Node2D" parent="."]
+position = Vector2( 7, 201 )
+script = ExtResource( 3 )
+
+[node name="KeybindsButtons" type="Label" parent="Keybinds"]
+margin_right = 211.0
+margin_bottom = 160.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "
+s, left
+d, up
+f, right
+j
+k"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeybindsKeys" type="Label" parent="Keybinds"]
+margin_right = 130.0
+margin_bottom = 160.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "Keybinds:
+Left Arrow:
+Center Arrow:
+Right Arrow:
+Next Instrument:
+Next Song:"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 403.756
+margin_top = 273.163
+margin_right = 615.756
+margin_bottom = 299.163
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "[DEBUG] Del Savegame"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="_del_save_game"]

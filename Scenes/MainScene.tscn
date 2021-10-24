@@ -1,50 +1,59 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/MainScene.gd" type="Script" id=1]
-
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://Fonts/Roboto-Light.ttf"
-
-[sub_resource type="DynamicFont" id=2]
-size = 60
-font_data = SubResource( 1 )
+[ext_resource path="res://Scenes/RythmGame.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Clicker.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/background1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/songs_gui/song1/gui_complete.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/gui.gd" type="Script" id=6]
+[ext_resource path="res://Sounds/FailSound.wav" type="AudioStream" id=12]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="UI" type="CanvasLayer" parent="."]
-layer = -5
+[node name="stageExample" type="Sprite" parent="."]
+position = Vector2( 255.984, 144 )
+texture = ExtResource( 4 )
 
-[node name="BG" type="Sprite" parent="UI"]
+[node name="RythmGame" parent="." instance=ExtResource( 2 )]
 
-[node name="Button" type="Button" parent="."]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 418.587
-margin_top = 505.226
-margin_right = 619.587
-margin_bottom = 568.226
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Clicker" parent="." instance=ExtResource( 3 )]
 
-[node name="Label" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 451.961
-margin_top = 69.5051
-margin_right = 633.961
-margin_bottom = 172.505
-rect_scale = Vector2( 0.82685, 0.441441 )
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
-text = "Punkte"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 40.75, 45.25 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+hframes = 5
+script = ExtResource( 6 )
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStream1" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStream2" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStream3" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStream4" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStream5" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
+autoplay = true
+
+[node name="AudioStream6" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+
+[node name="AudioStreamFail" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -10.0

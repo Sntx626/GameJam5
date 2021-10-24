@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Rhodes.wav-e7efeba689119eab52098bd02f374577.sample"
+path="res://.import/Rhodes.wav-e776b1155d45ab004f1227a20b2db3c2.sample"
 
 [deps]
 
-source_file="res://Songs/GameJamLofi1_52Bpm/sounds/Rhodes.wav"
-dest_files=[ "res://.import/Rhodes.wav-e7efeba689119eab52098bd02f374577.sample" ]
+source_file="res://Songs/Song3/sounds/Rhodes.wav"
+dest_files=[ "res://.import/Rhodes.wav-e776b1155d45ab004f1227a20b2db3c2.sample" ]
 
 [params]
 

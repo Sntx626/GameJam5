@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Kick.wav-c8a39aea7343a86d5745a32691903346.sample"
+path="res://.import/Kick.wav-8b860872dc4ad46d2df3a64f8ca11e48.sample"
 
 [deps]
 
-source_file="res://Songs/GameJamLofi1_52Bpm/sounds/Kick.wav"
-dest_files=[ "res://.import/Kick.wav-c8a39aea7343a86d5745a32691903346.sample" ]
+source_file="res://Songs/Song3/sounds/Kick.wav"
+dest_files=[ "res://.import/Kick.wav-8b860872dc4ad46d2df3a64f8ca11e48.sample" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Ambience.wav-03a8dba4a04c9eb66c2f080545fd24f1.sample"
+path="res://.import/Ambience.wav-b8050defeb15353a7383df5d644b5e3c.sample"
 
 [deps]
 
-source_file="res://Songs/Song2/sounds/Ambience.wav"
-dest_files=[ "res://.import/Ambience.wav-03a8dba4a04c9eb66c2f080545fd24f1.sample" ]
+source_file="res://Songs/Song4/sounds/Ambience.wav"
+dest_files=[ "res://.import/Ambience.wav-b8050defeb15353a7383df5d644b5e3c.sample" ]
 
 [params]
 

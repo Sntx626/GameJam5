@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Lead.wav-a1ff8ac3f67ab3d3d93b4b1f44a33c39.sample"
+path="res://.import/Lead.wav-513e356aa8ef6bc9a947ef701029afb7.sample"
 
 [deps]
 
-source_file="res://Songs/Song2/sounds/Lead.wav"
-dest_files=[ "res://.import/Lead.wav-a1ff8ac3f67ab3d3d93b4b1f44a33c39.sample" ]
+source_file="res://Songs/Song4/sounds/Lead.wav"
+dest_files=[ "res://.import/Lead.wav-513e356aa8ef6bc9a947ef701029afb7.sample" ]
 
 [params]
 

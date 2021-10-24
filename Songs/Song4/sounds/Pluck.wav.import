@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Pluck.wav-d6a940875bd45f0fd61c33b031a76675.sample"
+path="res://.import/Pluck.wav-922a5aeb9b8940e3e67af4ba721091b0.sample"
 
 [deps]
 
-source_file="res://Songs/Song2/sounds/Pluck.wav"
-dest_files=[ "res://.import/Pluck.wav-d6a940875bd45f0fd61c33b031a76675.sample" ]
+source_file="res://Songs/Song4/sounds/Pluck.wav"
+dest_files=[ "res://.import/Pluck.wav-922a5aeb9b8940e3e67af4ba721091b0.sample" ]
 
 [params]
 

@@ -2,6 +2,7 @@ extends Node2D
 
 func load_data():
 	var file = File.new()
+	print(file.file_exists("res://Saves/save_game.dat"))
 	if file.file_exists("res://Saves/save_game.dat"):
 		file.open("res://Saves/save_game.dat", File.READ)
 	else:
@@ -23,22 +24,36 @@ var data = null
 
 func _ready():
 	load_data()
-	add_to_currency(0, 0)
+	update_combo(data["combo"], false)
 
-var sleep = 0
 func _process(delta):
-	sleep += delta
-	if sleep > 1:
-		for i in range(len(data["score"]["buyer"])):
-			if data["score"]["buyer"][i] > 0:
-				add_to_currency(i, data["score"]["buyer"][i])
-		sleep = 0
+	if data["combo"] > 0:
+		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*(1+(data["combo"]/100))*delta)
+	else:
+		add_to_currency((data["tier"]+1)*(data["buyer"]+data["tier"])*delta)
+	buy_upgrades()
+
+func calculate_target_points(buyer, tier):
+	return (100*(buyer+1))*(tier+1)
+
+func buy_upgrades():
+	if data["buyer"] >= 4:
+		if Input.is_action_pressed("supremacy"):
+			increase_tier()
+			data["score"] = 0
+			data["buyer"] = 0
+			get_parent().load_song(data["tier"], data["buyer"])
+	elif data["score"] >= calculate_target_points(data["buyer"], data["tier"]):
+		if Input.is_action_pressed("prestige"):
+			add_to_buyer()
+			data["score"] = 0
+			get_parent().load_main_instrument(data["buyer"])
 
 func update_text():
-	if len(data["score"]["currencies"]) > 0:
-		$Score/ScoreValue.text = str(data["score"]["currencies"][0])
+	$Score/ScoreValue.text = str(int(data["score"]))
 
 func update_combo(newValue, canFail):
+	data["combo"] = newValue
 	$Score/ComboLabel.text = str(newValue) + 'x';
 	if (newValue == 0):
 		$Score/ComboLabel.visible = false;
@@ -48,20 +63,21 @@ func update_combo(newValue, canFail):
 		$Score/ComboLabel.visible = true;
 	return newValue
 
-func add_to_currency(tier:int, amount:int):
-	if tier < len(data["score"]["currencies"]):
-		data["score"]["currencies"][tier] += amount
-	else:
-		data["score"]["currencies"].append(0)
-		add_to_currency(tier, amount)
+var clickt = []
+var time_last = OS.get_ticks_usec()
+func add_to_currency(amount:float=1):
+	data["score"] += amount
+	update_text()
+	var temp = OS.get_ticks_usec()
+	clickt.append([amount, temp-time_last])
+	time_last = temp
+
+func add_to_buyer(amount:float=1):
+	data["buyer"] += amount
 	update_text()
 
-func add_to_buyer(tier:int, amount:int):
-	if tier < len(data["score"]["buyer"]):
-		data["score"]["buyer"][tier] += amount
-	else:
-		data["score"]["buyer"].append(0)
-		add_to_buyer(tier, amount)
+func increase_tier(amount:int=1):
+	data["tier"] += amount
 	update_text()
 
 func _del_save_game():
@@ -79,3 +95,7 @@ func _del_save_game():
 	dir.remove("res://Saves/save_game.dat")
 	
 	update_text()
+	
+	file.open("res://Saves/clicks.dat", File.WRITE)
+	file.store_string(JSON.print(clickt))
+	file.close()

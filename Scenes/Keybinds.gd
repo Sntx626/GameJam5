@@ -11,30 +11,27 @@ func _ready():
 
 # ! prestige and supremacy need to be reset
 func _process(delta):
-	if len(get_parent().data["score"]["currencies"]) > 0:
-		if get_parent().data["score"]["currencies"][len(get_parent().data["score"]["currencies"])-1] >= 1000:
-			prestige = true
-		else:
-			prestige = false
-	
-	if len(get_parent().data["prestige"]["currencies"]) > 0:
-		if get_parent().data["prestige"]["currencies"][len(get_parent().data["prestige"]["currencies"])-1] >= 1000:
-			supremacy = true
-		else:
-			supremacy = false
+	if get_parent().data["score"] >= get_parent().calculate_target_points(get_parent().data["buyer"], get_parent().data["tier"]):
+		prestige = true
+	else:
+		prestige = false
+	print(len(get_parent().get_parent().current_song["beatmaps"]))
+	if get_parent().data["buyer"] >= len(get_parent().get_parent().current_song["beatmaps"])-1:
+		supremacy = true
+	else:
+		supremacy = false
 	update()
 
 func update():
 	var button_text = default_button_text
 	var key_text = default_key_text
 	
-	if prestige:
-		button_text += "\np"
-		key_text += "\nPrestige:"
-	
 	if supremacy:
 		button_text += "\no"
 		key_text += "\nSupremacy:"
+	elif prestige:
+		button_text += "\np"
+		key_text += "\nPrestige:"
 	
 	$KeybindsButtons.text = button_text
 	$KeybindsKeys.text = key_text

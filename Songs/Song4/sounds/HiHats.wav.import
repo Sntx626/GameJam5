@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/HiHats.wav-b6854ebe8d61c71bb0223143889bcbbb.sample"
+path="res://.import/HiHats.wav-6a6468af940daaec3d69262c8623d810.sample"
 
 [deps]
 
-source_file="res://Songs/Song3/sounds/HiHats.wav"
-dest_files=[ "res://.import/HiHats.wav-b6854ebe8d61c71bb0223143889bcbbb.sample" ]
+source_file="res://Songs/Song4/sounds/HiHats.wav"
+dest_files=[ "res://.import/HiHats.wav-6a6468af940daaec3d69262c8623d810.sample" ]
 
 [params]
 

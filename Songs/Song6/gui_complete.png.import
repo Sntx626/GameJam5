@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gui_complete.png-869e49a7ccdec6678e6acc10f5c04d46.stex"
+path="res://.import/gui_complete.png-895a45c76c24387cba4adc02d127a586.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Songs/Song5/gui_complete.png"
-dest_files=[ "res://.import/gui_complete.png-869e49a7ccdec6678e6acc10f5c04d46.stex" ]
+source_file="res://Songs/Song6/gui_complete.png"
+dest_files=[ "res://.import/gui_complete.png-895a45c76c24387cba4adc02d127a586.stex" ]
 
 [params]
 

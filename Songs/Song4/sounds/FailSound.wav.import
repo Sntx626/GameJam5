@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/FailSound.wav-17b7c42046b4749e746b521206a6dc85.sample"
+path="res://.import/FailSound.wav-54822bc52bb679dfa0bc9cb4b1259973.sample"
 
 [deps]
 
-source_file="res://Songs/Song3/sounds/FailSound.wav"
-dest_files=[ "res://.import/FailSound.wav-17b7c42046b4749e746b521206a6dc85.sample" ]
+source_file="res://Songs/Song4/sounds/FailSound.wav"
+dest_files=[ "res://.import/FailSound.wav-54822bc52bb679dfa0bc9cb4b1259973.sample" ]
 
 [params]
 

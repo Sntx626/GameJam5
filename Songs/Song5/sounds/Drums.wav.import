@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Drums.wav-a364a7593aa68ec36aa74ea692e54d00.sample"
+path="res://.import/Drums.wav-579100f0942f922dbe7e87c9529515b3.sample"
 
 [deps]
 
-source_file="res://Songs/Song4/sounds/Drums.wav"
-dest_files=[ "res://.import/Drums.wav-a364a7593aa68ec36aa74ea692e54d00.sample" ]
+source_file="res://Songs/Song5/sounds/Drums.wav"
+dest_files=[ "res://.import/Drums.wav-579100f0942f922dbe7e87c9529515b3.sample" ]
 
 [params]
 

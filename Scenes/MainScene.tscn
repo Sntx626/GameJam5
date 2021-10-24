@@ -58,3 +58,5 @@ autoplay = true
 [node name="AudioStreamFail" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 volume_db = -10.0
+
+[node name="AudioStreamAmbient" type="AudioStreamPlayer" parent="."]

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Regen.wav-e18eea539856cd5d3b4cbb1a3e92d04f.sample"
+path="res://.import/Regen.wav-3b6b1bf94b653b2c5ecdbf5794b0f362.sample"
 
 [deps]
 
-source_file="res://Songs/Song3/sounds/Regen.wav"
-dest_files=[ "res://.import/Regen.wav-e18eea539856cd5d3b4cbb1a3e92d04f.sample" ]
+source_file="res://Songs/Song4/sounds/Regen.wav"
+dest_files=[ "res://.import/Regen.wav-3b6b1bf94b653b2c5ecdbf5794b0f362.sample" ]
 
 [params]
 

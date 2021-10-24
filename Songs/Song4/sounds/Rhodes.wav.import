@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Rhodes.wav-e776b1155d45ab004f1227a20b2db3c2.sample"
+path="res://.import/Rhodes.wav-06355cabcf81bc77793514177fc69719.sample"
 
 [deps]
 
-source_file="res://Songs/Song3/sounds/Rhodes.wav"
-dest_files=[ "res://.import/Rhodes.wav-e776b1155d45ab004f1227a20b2db3c2.sample" ]
+source_file="res://Songs/Song4/sounds/Rhodes.wav"
+dest_files=[ "res://.import/Rhodes.wav-06355cabcf81bc77793514177fc69719.sample" ]
 
 [params]
 

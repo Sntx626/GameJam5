@@ -99,6 +99,16 @@ func _process(delta):
 		last_fail -= timeCollapsed;
 		if (last_fail <= 0):
 			last_fail = 0;
+		
+	#animation for guitar guy
+	if $Clicker.data["buyer"] == 0 and $Clicker.data["tier"] == 0 and not $guitarPlayer.playing:
+		$guitarPlayer.play("playing");
+	
+	if $Clicker.data["buyer"] == 1 and $Clicker.data["tier"] == 0 and not $guitarPlayer.toCampfire:
+		$guitarPlayer.goToCampfire();
+	
+	if $Clicker.data["buyer"] == 3 and $Clicker.data["tier"] == 0 and not $campfire.playing:
+		$campfire.play("goingOn");
 
 func failNode():
 	if (last_fail == 0):
@@ -117,3 +127,8 @@ func hitNode():
 func _notification(event):
 	if event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST or event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		$Clicker.save_data()
+
+
+func _on_campfire_animation_finished():
+	if $campfire.animation == "goingOn" :
+		$campfire.play("burning");

@@ -9,6 +9,7 @@ var main_instrument_playtime = 2*1000;
 var time_beetween_failure = 1 * 1000;
 var last_fail = 0;
 var play = false;
+var ambient_player;
 
 func list_files_in_dir(path):
 	var files = []
@@ -47,6 +48,11 @@ func get_song(index:int) -> Dictionary:
 					var gui_img = load("res://Songs/" + d + "/gui_complete.PNG");
 					$GuiSong.texture = gui_img
 					$GuiSong.hframes = song["beatmaps"].size()
+					if (not song["ambienct_sounds"] == ""):
+						$AudioStreamAmbient.stream = load("res://Songs/"+d+"/sounds/"+song["ambienct_sounds"])
+						$AudioStreamAmbient.volume_db = 0
+					else:
+						$AudioStreamAmbient.volume_db = -80
 					$RythmGame.set("bpm", song["metadata"]["song_bpm"])
 					$RythmGame.set_stop(false);
 					$RythmGame.restart_song();
@@ -76,6 +82,7 @@ func tryReset():
 	pass;
 
 func startCall():
+	$AudioStreamAmbient.play(0);
 	for j in range(len(current_song["beatmaps"])):
 		song_audio_stream[j].play(0);
 
@@ -87,6 +94,7 @@ func _ready():
 	song_audio_stream.append($AudioStream4)
 	song_audio_stream.append($AudioStream5)
 	song_audio_stream.append($AudioStream6)
+	ambient_player = $AudioStreamAmbient
 	load_song($Clicker.data["tier"], $Clicker.data["buyer"])
 
 func load_song(song_index, beatmap_index):

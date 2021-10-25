@@ -14,12 +14,12 @@ func goToCampfire():
 	yield(t, "timeout")
 	t.set_wait_time(0.25)
 	play("walkingSide")
-	for i in range(195):
+	for _i in range(195):
 		translate(Vector2(-1.5, 0))
 		t.start()
 		yield(t, "timeout")
 	play("walkingBack")
-	for i in range(15):
+	for _i in range(15):
 		translate(Vector2(0, -1.5))
 		t.start()
 		yield(t, "timeout")

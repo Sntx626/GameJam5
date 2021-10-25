@@ -26,7 +26,6 @@ var template = load("res://Assets/arrow/ghost_arrow.tscn");
 var template_particle = load("res://Scenes/ArrowParticel.tscn");
 func _ready():
 	pass
-var points = 0;
 
 var timeCollapsed = 0;
 var tick = 0;
@@ -61,7 +60,7 @@ func pressedRowEvent(row):
 		var points = row[0].getStagePoints();
 		if (not points == -1):
 			if (points > 0):
-				var replays = int(get_parent().clicker.data["tier"] + 1) / len(get_parent().list_files_in_dir("res://Songs"))
+				var replays = int((get_parent().clicker.data["tier"] + 1) / len(get_parent().list_files_in_dir("res://Songs")))
 				var multi = (replays) if (replays > 0) else 1;
 				get_parent().clicker.add_to_currency(points*multi)
 				get_parent().hitNode();
@@ -137,7 +136,7 @@ func _process(delta):
 				addArrow($ArrowRight, arrow_right_list);
 			if (templateLeft[(tick+showTimeBeat)%templateLeft.length()] == '.'):
 				addArrow($ArrowLeft, arrow_left_list);
-			var song_audio_stream = get_parent().get("song_audio_stream");
+			#var song_audio_stream = get_parent().get("song_audio_stream");
 			#for audio_stream in song_audio_stream:
 			#	if (not audio_stream.playing):
 			#		audio_stream.play(0)

@@ -115,13 +115,13 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="."]
-margin_left = 403.756
-margin_top = 273.163
-margin_right = 615.756
-margin_bottom = 299.163
+margin_left = 444.0
+margin_top = 273.0
+margin_right = 576.0
+margin_bottom = 299.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 2 )
-text = "[DEBUG] Del Savegame"
+text = "Del Savegame"
 __meta__ = {
 "_edit_use_anchors_": false
 }

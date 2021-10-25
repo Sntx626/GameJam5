@@ -31,7 +31,6 @@ func get_song(index:int) -> Dictionary:
 	var song = null
 	var file = File.new()
 	for d in list_files_in_dir("res://Songs"):
-		print(d)
 		if file.file_exists("res://Songs/"+d+"/data.json"):
 			file.open("res://Songs/"+d+"/data.json", File.READ)
 			var p = JSON.parse(file.get_as_text())
@@ -43,7 +42,6 @@ func get_song(index:int) -> Dictionary:
 						stream.volume_db = -80;
 					for i in range(len(song["beatmaps"])):
 						song_audio_stream[i].stream = load("res://Songs/"+d+"/sounds/"+song["beatmaps"][i]["instrument"])
-						print("loaded:", song["beatmaps"][i]["instrument"])
 					var gui_img = load("res://Songs/" + d + "/gui_complete.png");
 					$GuiSong.texture = gui_img
 					$GuiSong.hframes = song["beatmaps"].size()
@@ -97,9 +95,6 @@ func _ready():
 	load_song($Clicker.data["tier"], $Clicker.data["buyer"])
 
 func load_song(song_index, beatmap_index):
-	print(song_index)
-	print(beatmap_index)
-	print(len(list_files_in_dir("res://Songs")))
 	current_song = get_song(int(song_index)%len(list_files_in_dir("res://Songs")));
 	load_main_instrument(beatmap_index)
 
@@ -137,7 +132,6 @@ func hitNode():
 func _notification(event):
 	if event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST or event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		$Clicker.save_data()
-
 
 func _on_campfire_animation_finished():
 	if $campfire.animation == "goingOn" :

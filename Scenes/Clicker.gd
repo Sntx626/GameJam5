@@ -2,20 +2,25 @@ extends Node2D
 
 func load_data():
 	var file = File.new()
-	if file.file_exists("res://Saves/save_game.dat"):
-		file.open("res://Saves/save_game.dat", File.READ)
+	if file.file_exists("user://save_game.dat"):
+		file.open("user://save_game.dat", File.READ)
+		var p = JSON.parse(file.get_as_text())
+		if typeof(p.result) == TYPE_DICTIONARY:
+			data = p.result
+		else:
+			push_error("Unexpected results.")
+		file.close()
 	else:
-		file.open("res://Saves/default_save_game.dat", File.READ)
-	var p = JSON.parse(file.get_as_text())
-	if typeof(p.result) == TYPE_DICTIONARY:
-		data = p.result
-	else:
-		push_error("Unexpected results.")
-	file.close()
+		data = {
+			"score": 0,
+			"buyer": 0,
+			"tier": 0,
+			"combo": 0
+		}
 
 func save_data():
 	var file = File.new()
-	file.open("res://Saves/save_game.dat", File.WRITE)
+	file.open("user://save_game.dat", File.WRITE)
 	file.store_string(JSON.print(data, "\t"))
 	file.close()
 
@@ -95,21 +100,18 @@ func increase_tier(amount:int=1):
 	update_text()
 
 func _del_save_game():
-	var file = File.new()
-	file.open("res://Saves/default_save_game.dat", File.READ)
-	var p = JSON.parse(file.get_as_text())
-	if typeof(p.result) == TYPE_DICTIONARY:
-		data = p.result
-		print("reset")
-	else:
-		push_error("Unexpected results.")
-	file.close()
+	data = {
+		"score": 0,
+		"buyer": 0,
+		"tier": 0,
+		"combo": 0
+	}
 	
-	var dir = Directory.new()
-	dir.remove("res://Saves/save_game.dat")
+	get_parent().current_song = get_parent().get_song(data["tier"])
+	get_parent().load_main_instrument(data["buyer"])
 	
+	update_combo(data["combo"], false)
 	update_text()
 	
-	file.open("res://Saves/clicks.dat", File.WRITE)
-	file.store_string(JSON.print(clickt))
-	file.close()
+	var dir = Directory.new()
+	dir.remove("user://save_game.dat")
